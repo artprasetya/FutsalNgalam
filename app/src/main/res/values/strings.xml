@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Futsal Ngalam</string>
+    <string name="title_activity_main">Futsal Ngalam</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="minimum_password">Minimal Password adalah 6 digit</string>
+    <string name="auth_failed">Login Gagal</string>
+    <string name="lbl_forgot_password"/>
+    <string name="title_send_password_reset">Send password reset</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

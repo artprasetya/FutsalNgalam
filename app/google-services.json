@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "913930711520",
+    "firebase_url": "https://futsalngalam.firebaseio.com",
+    "project_id": "futsalngalam",
+    "storage_bucket": "futsalngalam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913930711520:android:1556811a304e2ae5",
+        "android_client_info": {
+          "package_name": "com.example.asus.futsalngalam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913930711520-kp1tpigqb0juhbfr17uo8jg1r33ntsr1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asus.futsalngalam",
+            "certificate_hash": "7078df7566f3645167cae3543fef3aa1176947c7"
+          }
+        },
+        {
+          "client_id": "913930711520-8bjqvksnqtt3307mt4f9rtmj38trblt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTGJZXuyG0LtElUX_vmuZpyfzdR54Vvqw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913930711520-8bjqvksnqtt3307mt4f9rtmj38trblt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
