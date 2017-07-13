@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.Activity;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
