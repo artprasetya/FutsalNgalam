@@ -33,7 +33,7 @@ public class SlidingTab extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -51,13 +51,10 @@ public class SlidingTab extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-
                     return new DetailFieldFragment();
                 case 1:
-
                     return new ReviewFragment();
             }
-
             return null;
         }
 
@@ -79,4 +76,3 @@ public class SlidingTab extends AppCompatActivity {
         }
     }
 }
-
