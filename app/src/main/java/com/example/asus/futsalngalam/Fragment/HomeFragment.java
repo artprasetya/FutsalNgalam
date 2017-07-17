@@ -29,14 +29,33 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*// Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);*/
-
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         context = rootView.getContext(); // Assign your rootView to context
 
         Button detail1 = (Button) rootView.findViewById(R.id.detail1);
+        Button detail2 = (Button) rootView.findViewById(R.id.detail2);
+        Button detail3 = (Button) rootView.findViewById(R.id.detail3);
+
         detail1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                Intent intent = new Intent(context, SlidingTab.class);
+                startActivity(intent);
+            }
+        });
+
+        detail2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                Intent intent = new Intent(context, SlidingTab.class);
+                startActivity(intent);
+            }
+        });
+
+        detail3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
