@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameLayout, Fragment);
             fragmentTransaction.commit();
+        } else if (id == R.id.nav_profile) {
+            Intent intentProfile = new Intent(this, ProfileActivity.class);
+            startActivity(intentProfile);
         } else if (id == R.id.nav_reservation) {
             ReservationFragment Fragment = new ReservationFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
