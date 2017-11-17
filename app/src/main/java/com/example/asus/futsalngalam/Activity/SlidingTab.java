@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.daimajia.slider.library.SliderLayout;
 import com.example.asus.futsalngalam.Fragment.DetailFieldFragment;
 import com.example.asus.futsalngalam.Fragment.ReviewFragment;
 import com.example.asus.futsalngalam.R;
@@ -17,6 +18,8 @@ public class SlidingTab extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private SliderLayout sliderLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +27,6 @@ public class SlidingTab extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
