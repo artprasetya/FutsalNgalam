@@ -20,4 +20,12 @@
 
     <string name="tab_1">Menampilkan informasi lapangan</string>
     <string name="tab_2">Menampilkan Review dari User</string>
+
+    <string name="id">Username</string>
+    <string name="name">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="telepon">Telepon</string>
+    <string name="register">Daftar</string>
+    <string name="error">Kesalahan Jaringan</string>
 </resources>

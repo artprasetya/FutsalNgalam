@@ -60,6 +60,8 @@
         </activity>
         <activity android:name=".Activity.BookActivity">
         </activity>
+        <activity android:name=".Activity.EditProfileActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,16 +1,13 @@
 package com.example.asus.futsalngalam.Fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.example.asus.futsalngalam.Activity.SubmitReviewActivity;
 import com.example.asus.futsalngalam.R;
 
 
@@ -18,8 +15,6 @@ import com.example.asus.futsalngalam.R;
  * A simple {@link Fragment} subclass.
  */
 public class ReviewFragment extends Fragment {
-
-    private Button btn;
 
     public static ReviewFragment newInstance(){
         return new ReviewFragment();
@@ -35,15 +30,5 @@ public class ReviewFragment extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        btn = (Button) view.findViewById(R.id.review);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SubmitReviewActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
     }
 }

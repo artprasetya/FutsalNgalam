@@ -29,12 +29,13 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="54dp"/>
 
-            <TextView
-                android:id="@+id/profileName"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Enter Your Name"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
@@ -56,13 +57,16 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_email_black"/>
+
             <TextView
                 android:id="@+id/tvEmail"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp" />
+                android:layout_gravity="center_vertical"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:singleLine="true"
+                android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
@@ -70,38 +74,39 @@
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_contact_phone_black"/>
 
-            <TextView
-                android:id="@+id/tvPhone"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:inputType="phone"
                 android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
+                android:singleLine="true"
+                android:text="Enter Your Phone"
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </LinearLayout>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/editprofile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="EDIT PROFILE"
-        android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/btsave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorPrimaryDark"
+            android:text="Save"
+            android:textColor="@color/colorWhite"/>
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

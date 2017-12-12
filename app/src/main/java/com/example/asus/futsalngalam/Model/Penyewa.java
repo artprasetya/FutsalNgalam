@@ -1,33 +1,25 @@
 package com.example.asus.futsalngalam.Model;
 
+import java.io.Serializable;
+
 /**
- * Created by ASUS on 19-Nov-17.
+ * Created by ASUS on 24-Nov-17.
  */
 
-public class Penyewa {
-    String id;
-    String nama;
-    String email;
-    String password;
-    String telepon;
+public class Penyewa implements Serializable {
 
-    public String getId() {
-        return id;
+    String Nama;
+    String Telepon;
+
+    public Penyewa() {
+
     }
 
     public String getNama() {
-        return nama;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+        return Nama;
     }
 
     public String getTelepon() {
-        return telepon;
+        return Telepon;
     }
 }

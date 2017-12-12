@@ -14,19 +14,8 @@
               android:weightSum="1">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="117dp"
-        android:layout_height="78dp"
-        android:layout_weight="0.20"
-        app:srcCompat="@drawable/fnlogo"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Artiyan Prasetya"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_weight="0.33"/>
+        app:srcCompat="@mipmap/fnlogo"/>
 
 </LinearLayout>
