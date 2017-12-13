@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class Penyewa implements Serializable {
+
     private String Nama, Telepon;
 
     public Penyewa() {
