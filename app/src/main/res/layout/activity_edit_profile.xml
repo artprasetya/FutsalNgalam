@@ -21,7 +21,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/ic_account_box_white"
+                android:src="@drawable/ic_account_circle"
                 app:civ_border_color="#fff"
                 app:civ_border_width="2dp"
                 android:layout_gravity="center"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Enter Your Name"
+                android:hint="Enter Your Name"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
@@ -48,11 +48,13 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginTop="20dp">
+
         <LinearLayout
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -68,12 +70,14 @@
                 android:singleLine="true"
                 android:textStyle="bold"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -87,15 +91,14 @@
                 android:inputType="phone"
                 android:paddingLeft="20dp"
                 android:singleLine="true"
-                android:text="Enter Your Phone"
+                android:hint="Enter Your Phone"
                 android:textStyle="bold"/>
         </LinearLayout>
-
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
         <Button
             android:id="@+id/btsave"
             android:layout_width="fill_parent"

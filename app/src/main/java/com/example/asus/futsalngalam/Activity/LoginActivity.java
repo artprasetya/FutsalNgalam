@@ -27,6 +27,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -35,8 +36,6 @@ public class LoginActivity extends Activity {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
-
-        setContentView(R.layout.activity_login);
 
         inputEmail = (EditText) findViewById(R.id.etEmail);
         inputPassword = (EditText) findViewById(R.id.etPassword);

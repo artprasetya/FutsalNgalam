@@ -37,7 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = (TextView) findViewById(R.id.tvEmail);
         textViewPhone = (TextView) findViewById(R.id.tvPhone);
 
-        dbreference = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         idPenyewa = user.getUid();
@@ -54,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadData() {
+        dbreference = FirebaseDatabase.getInstance().getReference();
         dbreference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
