@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,7 +27,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-//    StorageReference storageReference;
+    StorageReference storageReference;
 
 //    int Image_Request_Code = 7;
 
@@ -47,7 +49,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_edit_profile);
 
         firebaseAuth = FirebaseAuth.getInstance();
-//        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("penyewa");
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -114,7 +116,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 //            }
 //        }
 //    }
-//
+
 //    private void uploadImage() {
 //        StorageReference profileImageRef = FirebaseStorage.getInstance().getReference("profileImg/"+System.currentTimeMillis() + ".jpg");
 //        if(uriProfileImage != null) {

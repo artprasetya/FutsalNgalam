@@ -6,69 +6,46 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@color/colorPrimary">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:adjustViewBounds="false"-->
-        <!--android:cropToPadding="false"-->
-        <!--android:paddingTop="@dimen/activity_vertical_margin"-->
-        <!--app:srcCompat="@mipmap/fnlogo"/>-->
-
-    <TextView
-        android:id="@+id/signin"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:textColor="@color/colorWhite"
-        android:textSize="17dp"
-        android:gravity="center"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
-        <LinearLayout
-            android:id="@+id/main"
+        <ImageView
+            android:src="@drawable/fnlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="25dp"
-            android:orientation="vertical"
-            android:layout_below="@+id/signin"
-            android:layout_alignParentStart="true">
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorWhite"/>
 
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Your Email Address"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:textColor="@color/colorWhite"/>
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorWhite"/>
 
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorWhite"
+            android:text="Login"
+            android:textColor="@color/colorPrimary"/>
 
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorWhite"
-                android:text="Login"
-                android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
     <LinearLayout
@@ -87,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Don't Have An Account?"
+            android:text="No account yet? Create one."
             android:textSize="13dp"
             android:textColor="@color/colorWhite"/>
 
