@@ -9,11 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.futsalngalam.Model.Penyewa;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,7 +30,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private Button btsave;
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
+    private DatabaseReference dbreference;
     StorageReference storageReference;
 
 //    int Image_Request_Code = 7;
@@ -50,7 +54,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         firebaseAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference("penyewa");
+        dbreference = FirebaseDatabase.getInstance().getReference("penyewa");
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         idPenyewa = user.getUid();
@@ -62,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         btsave = (Button) findViewById(R.id.btsave);
 
-        tvEmail.setText(emailPenyewa);
+        loadData();
 
 //        imageView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -93,12 +97,32 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editTextProfile.setError("Wajib diisi");
         }
 
-        databaseReference.child(idPenyewa).child("Nama").setValue(nama);
-        databaseReference.child(idPenyewa).child("Telepon").setValue(telepon);
+        dbreference.child(idPenyewa).child("Nama").setValue(nama);
+        dbreference.child(idPenyewa).child("Telepon").setValue(telepon);
         Toast.makeText(this, "Data saved.", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
         startActivity(intent);
+    }
+
+    private void loadData() {
+        dbreference = FirebaseDatabase.getInstance().getReference();
+        dbreference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
+                if (penyewa != null) {
+                    editTextProfile.setText(penyewa.getNama());
+                    tvEmail.setText(emailPenyewa);
+                    editTextPhone.setText(penyewa.getTelepon());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 //    @Override
