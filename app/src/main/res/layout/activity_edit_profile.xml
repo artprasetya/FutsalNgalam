@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:hint="Enter Your Name"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
@@ -81,7 +80,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_contact_phone_black"/>
+                android:src="@drawable/ic_perm_phone_msg"/>
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/etPhone"
@@ -91,7 +90,6 @@
                 android:inputType="phone"
                 android:paddingLeft="20dp"
                 android:singleLine="true"
-                android:hint="Enter Your Phone"
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>

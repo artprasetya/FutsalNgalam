@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.asus.futsalngalam.Activity.SlidingTab;
+import com.example.asus.futsalngalam.Activity.DetailFieldActivity;
 import com.example.asus.futsalngalam.R;
 
 
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-                Intent intent = new Intent(context, SlidingTab.class);
+                Intent intent = new Intent(context, DetailFieldActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-                Intent intent = new Intent(context, SlidingTab.class);
+                Intent intent = new Intent(context, DetailFieldActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-                Intent intent = new Intent(context, SlidingTab.class);
+                Intent intent = new Intent(context, DetailFieldActivity.class);
                 startActivity(intent);
             }
         });
