@@ -74,7 +74,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_contact_phone_black"/>
+                android:src="@drawable/ic_perm_phone_msg"/>
 
             <TextView
                 android:id="@+id/tvPhone"
@@ -86,19 +86,19 @@
         </LinearLayout>
 
     </LinearLayout>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/editprofile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="EDIT PROFILE"
-        android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/editprofile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorPrimaryDark"
+            android:text="EDIT PROFILE"
+            android:textColor="@color/colorWhite"/>
 
-</RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

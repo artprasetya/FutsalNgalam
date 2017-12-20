@@ -37,7 +37,9 @@
                 android:layout_marginTop="10dp"
                 android:textColor="#fff"
                 android:textSize="21sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:hint="Enter Your Name"
+                android:textColorHint="@color/colorWhite"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -66,8 +68,7 @@
                 android:layout_gravity="center_vertical"
                 android:inputType="text"
                 android:paddingLeft="20dp"
-                android:singleLine="true"
-                android:textStyle="bold"/>
+                android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +91,7 @@
                 android:inputType="phone"
                 android:paddingLeft="20dp"
                 android:singleLine="true"
-                android:textStyle="bold"/>
+                android:hint="Enter Your Phone Number"/>
         </LinearLayout>
     </LinearLayout>
 

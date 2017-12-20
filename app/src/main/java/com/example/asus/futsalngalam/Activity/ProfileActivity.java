@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference dbreference;
+    private DatabaseReference databaseReference;
 
     private TextView textViewName, textViewEmail, textViewPhone;
     private Button editProfile;
@@ -41,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         idPenyewa = user.getUid();
         emailPenyewa = user.getEmail();
+        textViewEmail.setText(emailPenyewa);
 
         loadData();
 
@@ -53,8 +54,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        dbreference = FirebaseDatabase.getInstance().getReference();
-        dbreference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                  Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);

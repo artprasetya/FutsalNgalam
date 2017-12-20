@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import com.example.asus.futsalngalam.R;
  */
 public class HomeFragment extends Fragment {
 
-    private Button detail1, detail2, detail3;
     Context context;
 
     public HomeFragment() {
@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
         context = rootView.getContext(); // Assign your rootView to context
 
         Button detail1 = (Button) rootView.findViewById(R.id.detail1);
+        CardView cardView = (CardView) rootView.findViewById(R.id.championTidar);
         Button detail2 = (Button) rootView.findViewById(R.id.detail2);
         Button detail3 = (Button) rootView.findViewById(R.id.detail3);
 
@@ -41,6 +42,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                Intent intent = new Intent(context, DetailFieldActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(context, DetailFieldActivity.class);
                 startActivity(intent);
             }

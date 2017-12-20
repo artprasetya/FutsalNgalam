@@ -30,7 +30,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private Button btsave;
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference dbreference;
+    private DatabaseReference databaseReference;
     StorageReference storageReference;
 
 //    int Image_Request_Code = 7;
@@ -54,7 +54,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         firebaseAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-        dbreference = FirebaseDatabase.getInstance().getReference("penyewa");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("penyewa");
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         idPenyewa = user.getUid();
@@ -65,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         editTextPhone = (EditText) findViewById(R.id.etPhone);
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         btsave = (Button) findViewById(R.id.btsave);
-
+        tvEmail.setText(emailPenyewa);
         loadData();
 
 //        imageView.setOnClickListener(new View.OnClickListener() {
@@ -87,27 +88,25 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void simpanDataPenyewa(){
-        String nama = editTextProfile.getText().toString().trim();
-        String telepon = editTextPhone.getText().toString().trim();
 
+        String nama = editTextProfile.getText().toString();
+        String telepon = editTextPhone.getText().toString();
         if(nama.isEmpty()){
             editTextProfile.setError("Wajib diisi");
-        }
-        if(telepon.isEmpty()){
+        } else if (telepon.isEmpty()){
             editTextProfile.setError("Wajib diisi");
+        } else {
+            databaseReference.child("penyewa").child(idPenyewa).child("Nama").setValue(nama);
+            databaseReference.child("penyewa").child(idPenyewa).child("Telepon").setValue(telepon);
+            Toast.makeText(this, "Data Berhasil Disimpan", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+            startActivity(intent);
         }
-
-        dbreference.child(idPenyewa).child("Nama").setValue(nama);
-        dbreference.child(idPenyewa).child("Telepon").setValue(telepon);
-        Toast.makeText(this, "Data saved.", Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-        startActivity(intent);
     }
 
     private void loadData() {
-        dbreference = FirebaseDatabase.getInstance().getReference();
-        dbreference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);

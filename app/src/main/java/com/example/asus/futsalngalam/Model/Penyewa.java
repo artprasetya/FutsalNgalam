@@ -14,6 +14,14 @@ public class Penyewa implements Serializable {
 
     }
 
+    public void setNama(String nama) {
+        Nama = nama;
+    }
+
+    public void setTelepon(String telepon) {
+        Telepon = telepon;
+    }
+
     public String getNama() {
         return Nama;
     }
