@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.asus.futsalngalam.Fragment.ReviewFragment;
 import com.example.asus.futsalngalam.R;
 
 public class DetailFieldActivity extends AppCompatActivity {
@@ -22,7 +21,7 @@ public class DetailFieldActivity extends AppCompatActivity {
         btnUlasan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DetailFieldActivity.this, ReviewFragment.class));
+                startActivity(new Intent(DetailFieldActivity.this, ReviewActivity.class));
             }
         });
 

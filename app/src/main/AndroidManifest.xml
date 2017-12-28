@@ -50,10 +50,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
-        <activity
-            android:name=".Activity.SlidingTab"
-            android:label="@string/title_activity_maps">
-        </activity>
         <activity android:name=".Activity.ProfileActivity">
         </activity>
         <activity android:name=".Activity.SubmitReviewActivity">
@@ -63,6 +59,8 @@
         <activity android:name=".Activity.EditProfileActivity">
         </activity>
         <activity android:name=".Activity.DetailFieldActivity">
+        </activity>
+        <activity android:name=".Activity.ReviewActivity">
         </activity>
     </application>
 
