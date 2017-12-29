@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.Activity;
+package com.example.asus.futsalngalam.MenuProfil;
 
 import android.content.Intent;
 import android.os.Bundle;

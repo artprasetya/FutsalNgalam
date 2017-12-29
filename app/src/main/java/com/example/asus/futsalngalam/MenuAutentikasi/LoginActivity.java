@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.Activity;
+package com.example.asus.futsalngalam.MenuAutentikasi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.futsalngalam.Activity.MainActivity;
 import com.example.asus.futsalngalam.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

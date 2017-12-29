@@ -16,6 +16,8 @@ import com.example.asus.futsalngalam.Fragment.ConfirmFragment;
 import com.example.asus.futsalngalam.Fragment.HomeFragment;
 import com.example.asus.futsalngalam.Fragment.MapsFragment;
 import com.example.asus.futsalngalam.Fragment.ReservationFragment;
+import com.example.asus.futsalngalam.MenuAutentikasi.LoginActivity;
+import com.example.asus.futsalngalam.MenuProfil.ProfileActivity;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 

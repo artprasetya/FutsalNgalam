@@ -20,19 +20,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".MenuAutentikasi.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SignupActivity"/>
+        <activity android:name=".MenuAutentikasi.SignupActivity"/>
         <activity
             android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Activity.ResetPasswordActivity">
+        <activity android:name=".MenuAutentikasi.ResetPasswordActivity">
         </activity>
         <activity
             android:name=".Activity.MapsActivity"
@@ -51,13 +51,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
-        <activity android:name=".Activity.ProfileActivity">
+        <activity android:name=".MenuProfil.ProfileActivity">
         </activity>
         <activity android:name=".Activity.SubmitReviewActivity">
         </activity>
         <activity android:name=".Activity.BookActivity">
         </activity>
-        <activity android:name=".Activity.EditProfileActivity">
+        <activity android:name=".MenuProfil.EditProfileActivity">
         </activity>
         <activity android:name=".Activity.DetailFieldActivity">
         </activity>

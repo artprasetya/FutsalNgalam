@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.Activity;
+package com.example.asus.futsalngalam.MenuProfil;
 
 import android.content.ContentResolver;
 import android.content.Intent;
