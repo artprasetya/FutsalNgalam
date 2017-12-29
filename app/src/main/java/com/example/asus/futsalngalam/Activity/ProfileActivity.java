@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         databaseReference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                 Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
+                Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
                 if (penyewa != null) {
                     textViewName.setText(penyewa.getNama());
                     textViewEmail.setText(emailPenyewa);
