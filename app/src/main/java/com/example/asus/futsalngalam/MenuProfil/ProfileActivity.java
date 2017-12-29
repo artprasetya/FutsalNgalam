@@ -19,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
     private TextView textViewName, textViewEmail, textViewPhone;
@@ -37,13 +36,16 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = (TextView) findViewById(R.id.tvEmail);
         textViewPhone = (TextView) findViewById(R.id.tvPhone);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        assert user != null;
         idPenyewa = user.getUid();
         emailPenyewa = user.getEmail();
-        textViewEmail.setText(emailPenyewa);
 
-        loadData();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        infoPenyewa();
+        textViewEmail.setText(emailPenyewa);
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,17 +55,13 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void loadData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+    public void infoPenyewa() {
         databaseReference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
-                if (penyewa != null) {
-                    textViewName.setText(penyewa.getNama());
-                    textViewEmail.setText(emailPenyewa);
-                    textViewPhone.setText(penyewa.getTelepon());
-                }
+                Penyewa dataPenyewa = dataSnapshot.getValue(Penyewa.class);
+                textViewName.setText(dataPenyewa.getNama());
+                textViewPhone.setText(dataPenyewa.getTelepon());
             }
 
             @Override

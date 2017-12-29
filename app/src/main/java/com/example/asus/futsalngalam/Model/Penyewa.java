@@ -6,31 +6,26 @@ package com.example.asus.futsalngalam.Model;
 
 public class Penyewa {
 
-    private String Nama, Telepon, uriProfileImage;
+    private String nama, email, telepon;
 
-    public Penyewa(String nama, String telepon) {
-
+    public Penyewa() {
     }
 
-    public Penyewa(String nama, String telepon, String uriProfileImage) {
-        this.Nama = nama;
-        this.Telepon = telepon;
-        this.uriProfileImage = uriProfileImage;
-    }
-
-    public void setNama(String nama) {
-        Nama = nama;
-    }
-
-    public void setTelepon(String telepon) {
-        Telepon = telepon;
+    public Penyewa(String nama, String email, String telepon) {
+        this.nama = nama;
+        this.email = email;
+        this.telepon = telepon;
     }
 
     public String getNama() {
-        return Nama;
+        return nama;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getTelepon() {
-        return Telepon;
+        return telepon;
     }
 }

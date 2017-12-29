@@ -28,4 +28,10 @@
     <string name="telepon">Telepon</string>
     <string name="register">Daftar</string>
     <string name="error">Kesalahan Jaringan</string>
+    <string name="your_email_address">Your Email Address</string>
+    <string name="your_profile_name">Your Profile Name</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="your_password">Your Password</string>
+    <string name="sign_up">sign up</string>
+    <string name="terms">By Signing up you agree with our terms and conditions</string>
 </resources>

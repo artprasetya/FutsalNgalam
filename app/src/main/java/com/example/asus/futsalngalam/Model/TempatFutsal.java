@@ -1,12 +1,10 @@
 package com.example.asus.futsalngalam.Model;
 
-import java.io.Serializable;
-
 /**
  * Created by ASUS on 28-Dec-17.
  */
 
-public class TempatFutsal implements Serializable {
+public class TempatFutsal {
 
     private String IdTempatFutsal;
     private String Nama;

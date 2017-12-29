@@ -20,10 +20,9 @@
                 android:id="@+id/championTidar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_marginBottom="6dp"
-                android:layout_marginTop="5dp"
-                app:cardElevation="10dp">
+                android:layout_marginTop="5dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -39,17 +38,6 @@
                         android:background="@color/colorWhite"
                         android:scaleType="fitXY"/>
 
-                    <Button
-                        android:id="@+id/detail1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/textView1"
-                        android:layout_alignEnd="@+id/textView1"
-                        android:layout_alignTop="@+id/textView1"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"/>
-
                     <TextView
                         android:id="@+id/textView1"
                         android:layout_width="fill_parent"
@@ -60,7 +48,6 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="6dp"
-                        android:text="Nama Tempat Futsal 1"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20dp"/>
                 </RelativeLayout>
@@ -71,10 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_marginBottom="6dp"
-                android:layout_marginTop="5dp"
-                app:cardElevation="10dp">
+                android:layout_marginTop="5dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -90,17 +76,6 @@
                         android:background="@color/colorWhite"
                         android:scaleType="fitXY"/>
 
-                    <Button
-                        android:id="@+id/detail2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/textView2"
-                        android:layout_alignEnd="@+id/textView2"
-                        android:layout_alignTop="@+id/textView2"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"/>
-
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="fill_parent"
@@ -111,7 +86,6 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="6dp"
-                        android:text="Nama Tempat Futsal 2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20dp"/>
                 </RelativeLayout>
@@ -122,10 +96,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_marginBottom="6dp"
-                android:layout_marginTop="5dp"
-                app:cardElevation="10dp">
+                android:layout_marginTop="5dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -141,17 +114,6 @@
                         android:background="@color/colorWhite"
                         android:scaleType="fitXY"/>
 
-                    <Button
-                        android:id="@+id/detail3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/textView3"
-                        android:layout_alignEnd="@+id/textView3"
-                        android:layout_alignTop="@+id/textView3"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"/>
-
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="fill_parent"
@@ -162,7 +124,6 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="6dp"
-                        android:text="Nama Tempat Futsal 3"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20dp"/>
                 </RelativeLayout>

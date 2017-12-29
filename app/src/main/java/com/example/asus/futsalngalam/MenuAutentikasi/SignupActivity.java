@@ -3,7 +3,6 @@ package com.example.asus.futsalngalam.MenuAutentikasi;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends Activity {
 
-    private EditText inputEmail, inputPassword;
-    private FirebaseAuth auth;
-    private Button btnSignUp;
+    private EditText  inputEmail, inputPassword;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,7 @@ public class SignupActivity extends Activity {
 
         inputEmail = (EditText) findViewById(R.id.etEmail);
         inputPassword = (EditText) findViewById(R.id.etPassword);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
+        Button btnSignUp = (Button) findViewById(R.id.btn_signup);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,14 +36,11 @@ public class SignupActivity extends Activity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-                    return;
+                if (email.isEmpty()) {
+                    inputEmail.setError("Wajib diisi");
                 }
-
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
+                if (password.isEmpty()) {
+                    inputPassword.setError("Wajib diisi");
                 }
 
                 if (password.length() < 6) {
@@ -58,9 +53,9 @@ public class SignupActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignupActivity.this, "Authentication Success.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Sign Up Success.", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }

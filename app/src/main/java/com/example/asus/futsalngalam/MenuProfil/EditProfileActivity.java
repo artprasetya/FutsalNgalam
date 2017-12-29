@@ -1,14 +1,13 @@
 package com.example.asus.futsalngalam.MenuProfil;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.asus.futsalngalam.Model.Penyewa;
 import com.example.asus.futsalngalam.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,8 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 
@@ -33,27 +32,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private static final int CHOOSE_IMAGE = 101;
     private ImageView imageView;
-    private TextView tvEmail;
     private EditText editTextProfile, editTextPhone;
     private Button btsave, selectImage;
+    private TextView tvEmail;
 
-    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-    StorageReference storageReference;
-
-//    int Image_Request_Code = 7;
 
     private String idPenyewa;
-    private String emailPenyewa;
-
-    Uri uriProfileImage;
-//    String profileImageUrl;
-
-//    // Folder path for Firebase Storage.
-//    String Storage_Path = "All_Image_Uploads/";
-//
-//    // Root Database Name for Firebase Database.
-//    String Database_Path = "All_Image_Uploads_Database";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +52,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         btsave = (Button) findViewById(R.id.btsave);
 
-        loadData();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("penyewa");
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        assert user != null;
+        idPenyewa = user.getUid();
+        String emailPenyewa = user.getEmail();
+
         tvEmail.setText(emailPenyewa);
 
-        idPenyewa = user.getUid();
-        emailPenyewa = user.getEmail();
+        infoPenyewa();
 
         selectImage.setOnClickListener(this);
         btsave.setOnClickListener(this);
@@ -95,19 +80,30 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void simpanDataPenyewa() {
+
+        String email = tvEmail.getText().toString();
         String nama = editTextProfile.getText().toString();
         String telepon = editTextPhone.getText().toString();
 
         if (nama.isEmpty()) {
             editTextProfile.setError("Wajib diisi");
         } else if (telepon.isEmpty()) {
-            editTextProfile.setError("Wajib diisi");
+            editTextPhone.setError("Wajib diisi");
         } else {
-            Penyewa penyewa = new Penyewa(nama, telepon);
-            databaseReference.child(idPenyewa).setValue(penyewa);
-            Toast.makeText(getApplicationContext(), "Biodata Anda Berhasil Disimpan", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-            startActivity(intent);
+            Penyewa dataProfil = new Penyewa(nama, email, telepon);
+            databaseReference.child(idPenyewa).setValue(dataProfil).addOnCompleteListener(EditProfileActivity.this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Biodata Anda Gagal Disimpan", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Biodata Anda Berhasil Disimpan", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
         }
     }
 
@@ -131,16 +127,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 //        }
 //    }
 
-    private void loadData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("penyewa").child(idPenyewa).addValueEventListener(new ValueEventListener() {
+    public void infoPenyewa() {
+        databaseReference.child(idPenyewa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
-                if (penyewa != null) {
-                    editTextProfile.setText(penyewa.getNama());
-                    editTextPhone.setText(penyewa.getTelepon());
-                }
+                Penyewa dataPenyewa = dataSnapshot.getValue(Penyewa.class);
+                editTextProfile.setText(dataPenyewa.getNama());
+                editTextPhone.setText(dataPenyewa.getTelepon());
             }
 
             @Override
@@ -154,7 +147,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK) {
-            uriProfileImage = data.getData();
+            Uri uriProfileImage = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImage);
                 imageView.setImageBitmap(bitmap);
@@ -164,11 +157,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    public String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-    }
+//    public String getFileExtension(Uri uri) {
+//        ContentResolver cR = getContentResolver();
+//        MimeTypeMap mime = MimeTypeMap.getSingleton();
+//        return mime.getExtensionFromMimeType(cR.getType(uri));
+//    }
 
     private void showImageChooser() {
         Intent intent = new Intent();
