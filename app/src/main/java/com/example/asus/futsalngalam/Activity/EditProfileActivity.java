@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.asus.futsalngalam.Model.Penyewa;
 import com.example.asus.futsalngalam.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -88,7 +86,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v == btsave){
+        if (v == btsave) {
             simpanDataPenyewa();
             finish();
         } else if (v == selectImage) {
@@ -96,30 +94,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void simpanDataPenyewa(){
-        StorageReference sRef = storageReference.child("Upload/"+ System.currentTimeMillis() + "." + getFileExtension(uriProfileImage));
-        if (uriProfileImage != null) {
-            sRef.putFile(uriProfileImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String nama = editTextProfile.getText().toString();
-                    String telepon = editTextPhone.getText().toString();
+    private void simpanDataPenyewa() {
+        String nama = editTextProfile.getText().toString();
+        String telepon = editTextPhone.getText().toString();
 
-                    if(nama.isEmpty()){
-                        editTextProfile.setError("Wajib diisi");
-                    } else if (telepon.isEmpty()){
-                        editTextProfile.setError("Wajib diisi");
-                    } else {
-                        databaseReference.child("penyewa").child(idPenyewa).child("Nama").setValue(nama);
-                        databaseReference.child("penyewa").child(idPenyewa).child("Telepon").setValue(telepon);
-                        databaseReference.child("penyewa").child(idPenyewa).child("uriProfileImage").setValue(taskSnapshot.getDownloadUrl().toString());
-                        Toast.makeText(getApplicationContext(), "Biodata Anda Berhasil Disimpan", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-                        startActivity(intent);
-                    }
-
-                }
-            });
+        if (nama.isEmpty()) {
+            editTextProfile.setError("Wajib diisi");
+        } else if (telepon.isEmpty()) {
+            editTextProfile.setError("Wajib diisi");
+        } else {
+            Penyewa penyewa = new Penyewa(nama, telepon);
+            databaseReference.child(idPenyewa).setValue(penyewa);
+            Toast.makeText(getApplicationContext(), "Biodata Anda Berhasil Disimpan", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -151,7 +139,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 Penyewa penyewa = dataSnapshot.getValue(Penyewa.class);
                 if (penyewa != null) {
                     editTextProfile.setText(penyewa.getNama());
-                    tvEmail.setText(emailPenyewa);
                     editTextPhone.setText(penyewa.getTelepon());
                 }
             }
@@ -166,7 +153,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK) {
             uriProfileImage = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImage);
@@ -183,7 +170,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void showImageChooser(){
+    private void showImageChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

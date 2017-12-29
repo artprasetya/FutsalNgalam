@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context="com.example.asus.futsalngalam.Fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -43,12 +43,12 @@
                         android:id="@+id/detail1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"
                         android:layout_alignBottom="@+id/textView1"
                         android:layout_alignEnd="@+id/textView1"
-                        android:layout_alignTop="@+id/textView1"/>
+                        android:layout_alignTop="@+id/textView1"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Detail"
+                        android:textColor="@color/colorWhite"/>
 
                     <TextView
                         android:id="@+id/textView1"
@@ -94,12 +94,12 @@
                         android:id="@+id/detail2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"
                         android:layout_alignBottom="@+id/textView2"
                         android:layout_alignEnd="@+id/textView2"
-                        android:layout_alignTop="@+id/textView2"/>
+                        android:layout_alignTop="@+id/textView2"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Detail"
+                        android:textColor="@color/colorWhite"/>
 
                     <TextView
                         android:id="@+id/textView2"
@@ -145,12 +145,12 @@
                         android:id="@+id/detail3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="Detail"
-                        android:textColor="@color/colorWhite"
                         android:layout_alignBottom="@+id/textView3"
                         android:layout_alignEnd="@+id/textView3"
-                        android:layout_alignTop="@+id/textView3"/>
+                        android:layout_alignTop="@+id/textView3"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Detail"
+                        android:textColor="@color/colorWhite"/>
 
                     <TextView
                         android:id="@+id/textView3"
