@@ -60,8 +60,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Penyewa dataPenyewa = dataSnapshot.getValue(Penyewa.class);
-                textViewName.setText(dataPenyewa.getNama());
-                textViewPhone.setText(dataPenyewa.getTelepon());
+                if (dataPenyewa != null) {
+                    textViewName.setText(dataPenyewa.getNama());
+                    textViewPhone.setText(dataPenyewa.getTelepon());
+                }
             }
 
             @Override

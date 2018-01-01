@@ -28,4 +28,16 @@ public class Penyewa {
     public String getTelepon() {
         return telepon;
     }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelepon(String telepon) {
+        this.telepon = telepon;
+    }
 }
