@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimaryDark"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              tools:context="com.example.asus.futsalngalam.MenuUtama.MenuFutsal">
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <GridView
+        android:id="@+id/grid_view_image_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/space"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="240dp"
+        android:columnWidth="110dp"
+        android:gravity="center"
+        android:numColumns="2">
+    </GridView>
+
+</LinearLayout>
+
+
+
+

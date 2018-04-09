@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -27,41 +28,34 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MenuAutentikasi.SignupActivity"/>
+        <activity android:name=".MenuAutentikasi.DaftarActivity"/>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".MenuUtama.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme"/>
         <activity android:name=".MenuAutentikasi.ResetPasswordActivity">
         </activity>
-        <activity
-            android:name=".Activity.MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
 
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
-        <activity android:name=".MenuProfil.ProfileActivity">
+        <activity android:name=".MenuProfil.ProfilActivity">
         </activity>
         <activity android:name=".Activity.SubmitReviewActivity">
         </activity>
-        <activity android:name=".Activity.BookActivity">
+        <activity android:name=".MenuProfil.UbahProfilActivity">
         </activity>
-        <activity android:name=".MenuProfil.EditProfileActivity">
-        </activity>
-        <activity android:name=".Activity.DetailFieldActivity">
+        <activity android:name=".MenuBeranda.DetailFieldActivity">
         </activity>
         <activity android:name=".Activity.ReviewActivity">
+        </activity>
+        <activity android:name=".MenuBeranda.HomeActivity">
+        </activity>
+        <activity android:name=".MenuPemesanan.PesananActivity">
+        </activity>
+        <activity android:name=".MenuPembayaran.PembayaranActivity">
         </activity>
     </application>
 

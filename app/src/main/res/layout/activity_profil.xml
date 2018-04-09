@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.asus.futsalngalam.MenuProfil.UbahProfilActivity">
+    tools:context="com.example.asus.futsalngalam.MenuProfil.ProfilActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,7 +17,6 @@
         app:theme="@style/ToolbarStyle"
         app:titleTextColor="@color/colorWhite" />
 
-
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -27,46 +26,16 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profil"
+            android:id="@+id/fotoProfil"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:layout_margin="50dp"
             android:src="@drawable/fn_icon"
             app:civ_border_color="#fff"
             app:civ_border_width="3dp" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorWhite" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <Button
-                android:id="@+id/pilihFoto"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="ubah foto"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/simpan_foto"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorOrange"
-                android:text="simpan"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -89,15 +58,13 @@
                 android:padding="10dp"
                 android:src="@drawable/profil" />
 
-            <EditText
-                android:id="@+id/etNama"
+            <TextView
+                android:id="@+id/tvNama"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="65dp"
                 android:background="@null"
-                android:backgroundTint="@color/colorPrimary"
                 android:gravity="center_vertical"
-                android:hint="Nama"
-                android:maxLines="1"
+                android:hint="jdwhkugxug"
                 android:padding="15dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="23sp"
@@ -116,14 +83,13 @@
                 android:padding="10dp"
                 android:src="@drawable/home" />
 
-            <EditText
-                android:id="@+id/etAlamat"
+            <TextView
+                android:id="@+id/tvAlamat"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="65dp"
                 android:background="@null"
-                android:backgroundTint="@color/colorPrimary"
                 android:gravity="center_vertical"
-                android:hint="Alamat"
+                android:hint="jdwhkugxug"
                 android:padding="15dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="23sp"
@@ -142,16 +108,13 @@
                 android:padding="10dp"
                 android:src="@drawable/phone" />
 
-            <EditText
-                android:id="@+id/etNoTelepon"
+            <TextView
+                android:id="@+id/tvNotelp"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="65dp"
                 android:background="@null"
-                android:backgroundTint="@color/colorPrimary"
                 android:gravity="center_vertical"
-                android:hint="Nomor Telepon"
-                android:inputType="number"
-                android:maxLines="1"
+                android:hint="jdwhkugxug"
                 android:padding="15dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="23sp"
@@ -168,12 +131,12 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/btnSimpan"
+            android:id="@+id/btn_ubah"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@color/colorOrange"
-            android:text="Simpan"
+            android:text="Ubah profil"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
     </LinearLayout>
