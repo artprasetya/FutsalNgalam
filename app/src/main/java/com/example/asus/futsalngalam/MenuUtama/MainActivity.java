@@ -9,7 +9,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.asus.futsalngalam.MenuAutentikasi.LoginActivity;
-import com.example.asus.futsalngalam.MenuBeranda.HomeActivity;
+import com.example.asus.futsalngalam.MenuBeranda.BerandaActivity;
 import com.example.asus.futsalngalam.MenuPemesanan.PesananActivity;
 import com.example.asus.futsalngalam.MenuProfil.ProfilActivity;
 import com.example.asus.futsalngalam.R;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         view.getContext().startActivity(a);
                         break;
                     case 1:
-                        Intent b = new Intent(view.getContext(), HomeActivity.class);
+                        Intent b = new Intent(view.getContext(), BerandaActivity.class);
                         view.getContext().startActivity(b);
                         break;
                     case 2:

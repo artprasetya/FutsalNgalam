@@ -47,11 +47,11 @@
         </activity>
         <activity android:name=".MenuProfil.UbahProfilActivity">
         </activity>
-        <activity android:name=".MenuBeranda.DetailFieldActivity">
+        <activity android:name=".MenuBeranda.DetailTempatFutsalActivity">
         </activity>
         <activity android:name=".Activity.ReviewActivity">
         </activity>
-        <activity android:name=".MenuBeranda.HomeActivity">
+        <activity android:name=".MenuBeranda.BerandaActivity">
         </activity>
         <activity android:name=".MenuPemesanan.PesananActivity">
         </activity>

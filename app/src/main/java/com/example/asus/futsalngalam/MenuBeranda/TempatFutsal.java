@@ -1,98 +1,92 @@
 package com.example.asus.futsalngalam.MenuBeranda;
 
+import java.io.Serializable;
+
 /**
  * Created by ASUS on 04-Jan-18.
  */
 
-public class TempatFutsal {
+public class TempatFutsal implements Serializable {
 
-    private String NamaFutsal, Harga, Alamat, Deskripsi, Email, Image, Kontak, Buka, Tutup;
+    private String idPetugas, namaTempatFutsal, alamat, deskripsi, fotoProfil, noTelepon;
+    public double latitude;
+    public double longitude;
 
     public TempatFutsal() {
-
     }
 
-    public TempatFutsal(String namaFutsal, String harga, String alamat, String deskripsi, String email, String image, String kontak, String buka, String tutup) {
-        NamaFutsal = namaFutsal;
-        Harga = harga;
-        Alamat = alamat;
-        Deskripsi = deskripsi;
-        Email = email;
-        Image = image;
-        Kontak = kontak;
-        Buka = buka;
-        Tutup = tutup;
+    public TempatFutsal(String idPetugas, String namaTempatFutsal, String alamat, String deskripsi, String noTelepon, String fotoProfil, double latitude, double longitude) {
+        this.idPetugas = idPetugas;
+        this.namaTempatFutsal = namaTempatFutsal;
+        this.alamat = alamat;
+        this.deskripsi = deskripsi;
+        this.noTelepon = noTelepon;
+        this.fotoProfil = fotoProfil;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public void setNamaFutsal(String namaFutsal) {
-        NamaFutsal = namaFutsal;
+    public String getIdPetugas() {
+        return idPetugas;
     }
 
-    public void setHarga(String harga) {
-        Harga = harga;
+    public void setIdPetugas(String idPetugas) {
+        this.idPetugas = idPetugas;
     }
 
-    public void setAlamat(String alamat) {
-        Alamat = alamat;
+    public String getNamaTempatFutsal() {
+        return namaTempatFutsal;
     }
 
-    public void setDeskripsi(String deskripsi) {
-        Deskripsi = deskripsi;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public void setImage(String image) {
-        Image = image;
-    }
-
-    public void setKontak(String kontak) {
-        Kontak = kontak;
-    }
-
-    public void setBuka(String buka) {
-        Buka = buka;
-    }
-
-    public void setTutup(String tutup) {
-        Tutup = tutup;
-    }
-
-    public String getNamaFutsal() {
-        return NamaFutsal;
-    }
-
-    public String getHarga() {
-        return Harga;
+    public void setNamaTempatFutsal(String namaTempatFutsal) {
+        this.namaTempatFutsal = namaTempatFutsal;
     }
 
     public String getAlamat() {
-        return Alamat;
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
     }
 
     public String getDeskripsi() {
-        return Deskripsi;
+        return deskripsi;
     }
 
-    public String getEmail() {
-        return Email;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
-    public String getImage() {
-        return Image;
+    public String getNoTelepon() {
+        return noTelepon;
     }
 
-    public String getKontak() {
-        return Kontak;
+    public void setNoTelepon(String noTelepon) {
+        this.noTelepon = noTelepon;
     }
 
-    public String getBuka() {
-        return Buka;
+    public String getFotoProfil() {
+        return fotoProfil;
     }
 
-    public String getTutup() {
-        return Tutup;
+    public void setFotoProfil(String fotoProfil) {
+        this.fotoProfil = fotoProfil;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
