@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuBeranda;
+package com.example.asus.futsalngalam.MenuTempatFutsal.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.asus.futsalngalam.MenuTempatFutsal.DetailTempatFutsalActivity;
+import com.example.asus.futsalngalam.MenuTempatFutsal.Model.TempatFutsal;
 import com.example.asus.futsalngalam.R;
 
 import java.util.List;
@@ -48,6 +50,7 @@ public class TempatFutsalAdapter extends RecyclerView.Adapter<TempatFutsalAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final TempatFutsal dataTempatFutsal = tempatFutsalList.get(position);
+        final String idPetugas = dataTempatFutsal.getIdPetugas();
         final String fotoTempatFutsal = dataTempatFutsal.getFotoProfil();
         final String namaTempatFutsal = dataTempatFutsal.getNamaTempatFutsal();
 
@@ -60,7 +63,7 @@ public class TempatFutsalAdapter extends RecyclerView.Adapter<TempatFutsalAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailTempatFutsalActivity.class);
-                intent.putExtra("idPetugas", tempatFutsalList.get(position).getIdPetugas());
+                intent.putExtra("idPetugas", idPetugas);
                 context.startActivity(intent);
             }
         });

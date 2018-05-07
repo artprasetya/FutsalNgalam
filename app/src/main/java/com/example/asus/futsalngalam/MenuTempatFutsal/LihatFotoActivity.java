@@ -1,18 +1,15 @@
-package com.example.asus.futsalngalam.MenuBeranda;
+package com.example.asus.futsalngalam.MenuTempatFutsal;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.TempatFutsal;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Adapter.TempatFutsalAdapter;
+import com.example.asus.futsalngalam.MenuTempatFutsal.Adapter.AlbumFotoAdapter;
+import com.example.asus.futsalngalam.MenuTempatFutsal.Model.AlbumFoto;
 import com.example.asus.futsalngalam.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,9 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BerandaActivity extends AppCompatActivity {
+public class LihatFotoActivity extends AppCompatActivity {
     // Creating DatabaseReference.
-    DatabaseReference dbRef;
+    DatabaseReference databaseReference;
 
     // Creating RecyclerView.
     RecyclerView recyclerView;
@@ -36,26 +33,16 @@ public class BerandaActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     // Creating List of ImageUploadInfo class.
-    List<TempatFutsal> tempatFutsalList = new ArrayList<>();
+    List<AlbumFoto> list = new ArrayList<>();
 
-    private FirebaseAuth auth;
-    private String idPemesan;
     private Toolbar toolbar;
-
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beranda);
-
-        context = this;
+        setContentView(R.layout.activity_lihat_foto);
 
         setToolbar();
-
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        idPemesan = user.getUid();
 
         // Assign id to RecyclerView.
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -64,34 +51,38 @@ public class BerandaActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         // Setting RecyclerView layout as LinearLayout.
-        recyclerView.setLayoutManager(new LinearLayoutManager(BerandaActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(LihatFotoActivity.this));
 
         // Assign activity this to progress dialog.
-        progressDialog = new ProgressDialog(BerandaActivity.this);
+        progressDialog = new ProgressDialog(LihatFotoActivity.this);
 
         // Setting up message in Progress dialog.
-        progressDialog.setMessage("Memuat...");
+        progressDialog.setMessage("Loading Images From Firebase.");
 
         // Showing progress dialog.
         progressDialog.show();
 
-        getDataTempatFutsal();
+        getDataFoto();
     }
 
-    private void getDataTempatFutsal() {
-        //database path
-        dbRef = FirebaseDatabase.getInstance().getReference("tempatFutsal");
-
+    private void getDataFoto() {
+        // Setting up Firebase image upload folder path in databaseReference.
+        // The path is already defined in MainActivity.
+        databaseReference = FirebaseDatabase.getInstance().getReference("tempatFutsal");
+        String idPetugas = getIntent().getStringExtra("idPetugas");
         // Adding Add Value Event Listener to databaseReference.
-        dbRef.addValueEventListener(new ValueEventListener() {
+        databaseReference.child(idPetugas).child("album").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                list.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    TempatFutsal dataTempatFutsal = postSnapshot.getValue(TempatFutsal.class);
-                    tempatFutsalList.add(dataTempatFutsal);
+
+                    AlbumFoto albumFoto = postSnapshot.getValue(AlbumFoto.class);
+
+                    list.add(albumFoto);
                 }
 
-                adapter = new TempatFutsalAdapter(context, tempatFutsalList);
+                adapter = new AlbumFotoAdapter(getApplicationContext(), list);
 
                 recyclerView.setAdapter(adapter);
 
@@ -112,7 +103,7 @@ public class BerandaActivity extends AppCompatActivity {
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Beranda");
+        getSupportActionBar().setTitle("Foto Lainnya");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

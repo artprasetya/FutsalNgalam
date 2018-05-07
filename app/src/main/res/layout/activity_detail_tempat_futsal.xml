@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.asus.futsalngalam.MenuBeranda.DetailTempatFutsalActivity">
+    tools:context="com.example.asus.futsalngalam.MenuTempatFutsal.DetailTempatFutsalActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -60,6 +60,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -68,10 +69,22 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="2"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1"
                         android:background="@color/colorOrange"
                         android:text="foto lainnya"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_ulasan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorOrange"
+                        android:text="Lihat Ulasan"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -117,9 +130,28 @@
                         android:textStyle="bold" />
 
                     <android.support.v7.widget.RecyclerView
+                        android:id="@+id/fasilitas_list"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </android.support.v7.widget.RecyclerView>
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:text="Lapangan : "
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/lapangan_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <View
                         android:layout_width="fill_parent"
@@ -143,20 +175,22 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:layout_marginLeft="10dp"
                             android:id="@+id/whatsapp"
-                            android:layout_width="65dp"
-                            android:layout_height="65dp"
-                            android:padding="10dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
                             android:src="@drawable/whatsapp" />
 
                         <TextView
                             android:id="@+id/tvKontak"
                             android:layout_width="match_parent"
-                            android:layout_height="65dp"
+                            android:layout_height="50dp"
                             android:background="@null"
                             android:gravity="center_vertical"
-                            android:padding="15dp"
-                            android:textColor="@color/colorBlack"
+                            android:text="0812345679"
+                            android:padding="5dp"
+                            android:layout_marginLeft="10dp"
                             android:textSize="23sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -165,21 +199,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="5dp"
                         android:background="@color/colorPrimary" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="5dp"
-                            android:text="Pesan  : "
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

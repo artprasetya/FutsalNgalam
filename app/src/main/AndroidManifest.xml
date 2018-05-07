@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.asus.futsalngalam">
+    package="com.example.asus.futsalngalam">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,40 +23,33 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MenuAutentikasi.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuAutentikasi.DaftarActivity"/>
+        <activity android:name=".MenuAutentikasi.DaftarActivity" />
         <activity
             android:name=".MenuUtama.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".MenuAutentikasi.ResetPasswordActivity">
-        </activity>
-
+            android:theme="@style/AppTheme" />
+        <activity android:name=".MenuAutentikasi.ResetPasswordActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
-        <activity android:name=".MenuProfil.ProfilActivity">
-        </activity>
-        <activity android:name=".Activity.SubmitReviewActivity">
-        </activity>
-        <activity android:name=".MenuProfil.UbahProfilActivity">
-        </activity>
-        <activity android:name=".MenuBeranda.DetailTempatFutsalActivity">
-        </activity>
-        <activity android:name=".Activity.ReviewActivity">
-        </activity>
-        <activity android:name=".MenuBeranda.BerandaActivity">
-        </activity>
-        <activity android:name=".MenuPemesanan.PesananActivity">
-        </activity>
-        <activity android:name=".MenuPembayaran.PembayaranActivity">
-        </activity>
+        <activity android:name=".MenuProfil.ProfilActivity" />
+        <activity android:name=".Activity.SubmitReviewActivity" />
+        <activity android:name=".MenuProfil.UbahProfilActivity" />
+        <activity android:name=".MenuTempatFutsal.DetailTempatFutsalActivity" />
+        <activity android:name=".Activity.ReviewActivity" />
+        <activity android:name=".MenuBeranda.BerandaActivity" />
+        <activity android:name=".MenuPemesanan.PesananActivity" />
+        <activity
+            android:name=".MenuTempatFutsal.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".MenuTempatFutsal.LihatFotoActivity"></activity>
     </application>
 
 </manifest>
