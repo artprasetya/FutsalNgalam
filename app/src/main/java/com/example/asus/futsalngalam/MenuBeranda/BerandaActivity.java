@@ -86,6 +86,7 @@ public class BerandaActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                tempatFutsalList.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     TempatFutsal dataTempatFutsal = postSnapshot.getValue(TempatFutsal.class);
                     tempatFutsalList.add(dataTempatFutsal);

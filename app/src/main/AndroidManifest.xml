@@ -40,16 +40,15 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MenuProfil.ProfilActivity" />
-        <activity android:name=".Activity.SubmitReviewActivity" />
         <activity android:name=".MenuProfil.UbahProfilActivity" />
         <activity android:name=".MenuTempatFutsal.DetailTempatFutsalActivity" />
-        <activity android:name=".Activity.ReviewActivity" />
         <activity android:name=".MenuBeranda.BerandaActivity" />
-        <activity android:name=".MenuPemesanan.PesananActivity" />
+        <activity android:name=".MenuPesanan.PesananActivity" />
         <activity
             android:name=".MenuTempatFutsal.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".MenuTempatFutsal.LihatFotoActivity"></activity>
+        <activity android:name=".MenuTempatFutsal.LihatFotoActivity" />
+        <activity android:name=".MenuPesanan.PilihRekeningActivity"></activity>
     </application>
 
 </manifest>

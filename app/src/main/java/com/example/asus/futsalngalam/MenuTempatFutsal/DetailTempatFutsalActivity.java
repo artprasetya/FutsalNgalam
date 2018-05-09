@@ -81,7 +81,6 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
         tvKontak = (TextView) findViewById(R.id.tvKontak);
         tvDeskripsi = (TextView) findViewById(R.id.tvDeskripsi);
         btn_foto = (Button) findViewById(R.id.btn_foto);
-//        btnUbah = (Button) findViewById(R.id.btn_ubah);
 
         getDataFutsal();
         getDataFasilitas();
@@ -93,28 +92,24 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
                 goToWhatsApp();
             }
         });
-
         tvKontak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToDial();
             }
         });
-
         mapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoMap();
             }
         });
-
         btn_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoFoto();
             }
         });
-
     }
 
     private void getDataLapangan() {

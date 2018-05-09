@@ -40,11 +40,7 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profil Pemesan");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setToolbar();
 
         circleImageView = (CircleImageView) findViewById(R.id.fotoProfil);
         textViewNama = (TextView) findViewById(R.id.tvNama);
@@ -66,6 +62,14 @@ public class ProfilActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfilActivity.this, UbahProfilActivity.class));
             }
         });
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profil Pemesan");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public void getDataPemesan() {

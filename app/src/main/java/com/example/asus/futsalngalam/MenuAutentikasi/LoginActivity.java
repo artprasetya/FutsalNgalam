@@ -38,9 +38,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
-
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();

@@ -144,9 +144,60 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
-                        android:text="Lapangan : "
+                        android:text="Kontak : "
                         android:textSize="18dp"
                         android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/whatsapp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="5dp"
+                            android:src="@drawable/whatsapp" />
+
+                        <TextView
+                            android:id="@+id/tvKontak"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@null"
+                            android:gravity="center_vertical"
+                            android:padding="5dp"
+                            android:text="0812345679"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorOrange"
+                        android:padding="10dp"
+                        android:paddingTop="5dp"
+                        android:text="Pilih Lapangan"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorGrey" />
+
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/lapangan_list"
@@ -161,65 +212,35 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="5dp"
-                        android:text="Kontak : "
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:background="@color/colorPrimaryDark"
+                        android:padding="5dp"
+                        android:text="Supported By Futsal Ngalam"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/whatsapp"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="5dp"
-                            android:src="@drawable/whatsapp" />
-
-                        <TextView
-                            android:id="@+id/tvKontak"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@null"
-                            android:gravity="center_vertical"
-                            android:text="0812345679"
-                            android:padding="5dp"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="23sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/colorPrimary" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:id="@+id/linear_action"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:weightSum="2">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linear_action"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:weightSum="1">-->
 
-        <Button
-            android:id="@+id/btn_pesan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@color/colorOrange"
-            android:text="Pesan"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-    </LinearLayout>
+    <!--<Button-->
+    <!--android:id="@+id/btnPembayaran"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@color/colorOrange"-->
+    <!--android:text="Lanjut ke pembayaran"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textStyle="bold" />-->
+    <!--</LinearLayout>-->
+
+
 </RelativeLayout>
