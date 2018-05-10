@@ -43,12 +43,13 @@
         <activity android:name=".MenuProfil.UbahProfilActivity" />
         <activity android:name=".MenuTempatFutsal.DetailTempatFutsalActivity" />
         <activity android:name=".MenuBeranda.BerandaActivity" />
-        <activity android:name=".MenuPesanan.PesananActivity" />
+        <activity android:name=".MenuPesanan.BuatPesananActivity" />
         <activity
             android:name=".MenuTempatFutsal.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".MenuTempatFutsal.LihatFotoActivity" />
-        <activity android:name=".MenuPesanan.PilihRekeningActivity"></activity>
+        <activity android:name=".MenuPesanan.PilihRekeningActivity" />
+        <activity android:name=".MenuPesanan.DetailPesananActivity"></activity>
     </application>
 
 </manifest>

@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class PesananActivity extends AppCompatActivity {
+public class BuatPesananActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DatabaseReference dbRef;
@@ -43,6 +43,7 @@ public class PesananActivity extends AppCompatActivity {
     private Button btnPembayaran;
     private FirebaseAuth auth;
     private TextView tanggalPesan;
+    private Integer durasi = 0;
 
     //DatePicker
     private DatePickerDialog datePickerDialog;
@@ -57,7 +58,7 @@ public class PesananActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pesanan);
+        setContentView(R.layout.activity_buat_pesanan);
 
         setToolbar();
 
@@ -90,16 +91,35 @@ public class PesananActivity extends AppCompatActivity {
 
         getDataPesanan();
 
+        btnCekJadwal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cekJadwal();
+            }
+        });
+
         btnPembayaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String idPetugas = getIntent().getStringExtra("idPetugas");
-                Intent intent = new Intent(PesananActivity.this, PilihRekeningActivity.class);
+                Intent intent = new Intent(BuatPesananActivity.this, PilihRekeningActivity.class);
                 intent.putExtra("idPetugas", idPetugas);
                 startActivity(intent);
             }
         });
 
+    }
+
+    private void cekJadwal() {
+        Integer jamMulai = (Integer) spinnerMulai.getSelectedItem();
+        Integer jamSelesai = (Integer) spinnerSelesai.getSelectedItem();
+
+        if (jamSelesai < jamMulai) {
+            btnCekJadwal.setText("Jadwal Tidak Tersedia");
+            Toast.makeText(this, "Perikasa Kembali Jadwal Pesan", Toast.LENGTH_LONG).show();
+        } else {
+            btnCekJadwal.setText("Jadwal Tersedia");
+        }
     }
 
     private void showDateDialog() {
@@ -156,7 +176,7 @@ public class PesananActivity extends AppCompatActivity {
         spinnerMulai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PesananActivity.this, "Selected " + adapterMulai.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BuatPesananActivity.this, "Selected " + adapterMulai.getItem(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -168,7 +188,7 @@ public class PesananActivity extends AppCompatActivity {
         spinnerSelesai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PesananActivity.this, "Selected " + adapterSelesai.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BuatPesananActivity.this, "Selected " + adapterSelesai.getItem(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override

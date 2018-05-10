@@ -1,12 +1,14 @@
 package com.example.asus.futsalngalam.MenuPesanan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.asus.futsalngalam.MenuPesanan.DetailPesananActivity;
 import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Rekening;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DatabaseReference;
@@ -55,8 +57,22 @@ public class RekeningAdapter extends RecyclerView.Adapter<RekeningAdapter.ViewHo
         final String idRekening = rekeningList.get(position).getIdRekening();
         final String namaRekening = rekeningList.get(position).getNamaRekening();
         final String namaBank = rekeningList.get(position).getNamaBank();
+        final String nomorRekening = rekeningList.get(position).getNomorRekening();
 
         holder.tvNamaBank.setText(namaBank);
+
+        holder.tvNamaBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailPesananActivity.class);
+                intent.putExtra("idPetugas", idPetugas);
+                intent.putExtra("idRekening", idRekening);
+                intent.putExtra("namaRekening", namaRekening);
+                intent.putExtra("namaBank", namaBank);
+                intent.putExtra("nomorRekening", nomorRekening);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

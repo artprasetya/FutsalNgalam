@@ -213,34 +213,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimaryDark"
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:text="Supported By Futsal Ngalam"
                         android:textAlignment="center"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/linear_action"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="1">-->
-
-    <!--<Button-->
-    <!--android:id="@+id/btnPembayaran"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@color/colorOrange"-->
-    <!--android:text="Lanjut ke pembayaran"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textStyle="bold" />-->
-    <!--</LinearLayout>-->
-
-
 </RelativeLayout>

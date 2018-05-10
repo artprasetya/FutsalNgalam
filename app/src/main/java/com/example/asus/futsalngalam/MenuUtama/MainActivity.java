@@ -6,11 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.asus.futsalngalam.MenuAutentikasi.LoginActivity;
 import com.example.asus.futsalngalam.MenuBeranda.BerandaActivity;
-import com.example.asus.futsalngalam.MenuPesanan.PesananActivity;
+import com.example.asus.futsalngalam.MenuPesanan.BuatPesananActivity;
 import com.example.asus.futsalngalam.MenuProfil.ProfilActivity;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,14 +62,13 @@ public class MainActivity extends AppCompatActivity {
                         view.getContext().startActivity(b);
                         break;
                     case 2:
-                        Intent c = new Intent(view.getContext(), PesananActivity.class);
+                        Intent c = new Intent(view.getContext(), BuatPesananActivity.class);
                         view.getContext().startActivity(c);
                         break;
                     case 3:
                         signOut();
                         break;
                 }
-                Toast.makeText(MainActivity.this, "  " + gridViewString[+i], Toast.LENGTH_SHORT).show();
             }
         });
     }

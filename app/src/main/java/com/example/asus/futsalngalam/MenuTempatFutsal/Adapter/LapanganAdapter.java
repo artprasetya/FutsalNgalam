@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.asus.futsalngalam.MenuPesanan.PesananActivity;
+import com.example.asus.futsalngalam.MenuPesanan.BuatPesananActivity;
 import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Lapangan;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +67,7 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
         holder.tvNamaLapangan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PesananActivity.class);
+                Intent intent = new Intent(context, BuatPesananActivity.class);
                 intent.putExtra("idPetugas", idPetugas);
                 intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("namaLapangan", namaLapangan);
@@ -79,7 +79,7 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
         holder.tvHarga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PesananActivity.class);
+                Intent intent = new Intent(context, BuatPesananActivity.class);
                 intent.putExtra("idPetugas", idPetugas);
                 intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("namaLapangan", namaLapangan);

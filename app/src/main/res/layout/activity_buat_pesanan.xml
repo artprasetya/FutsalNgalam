@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.asus.futsalngalam.MenuPesanan.PesananActivity">
+    tools:context="com.example.asus.futsalngalam.MenuPesanan.BuatPesananActivity">
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Jam Mulai"
+                android:text="Jam mulai :"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/selesai"
-                android:text="Jam Selesai"
+                android:text="Jam selesai :"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -169,7 +169,7 @@
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Pilih Tanggal"
+                android:drawableRight="@drawable/ic_date_range_black_24dp"
                 android:textSize="15sp" />
 
             <Spinner
@@ -177,14 +177,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="viewEnd" />
+                android:textAlignment="center" />
 
             <Spinner
                 android:id="@+id/jamSelesai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="viewEnd" />
+                android:textAlignment="center" />
 
         </LinearLayout>
 
