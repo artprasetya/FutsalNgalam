@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuTempatFutsal.Adapter;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.asus.futsalngalam.MenuPesanan.BuatPesananActivity;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Lapangan;
+import com.example.asus.futsalngalam.Model.Lapangan;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

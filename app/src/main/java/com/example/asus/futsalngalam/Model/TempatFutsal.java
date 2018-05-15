@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuTempatFutsal.Model;
+package com.example.asus.futsalngalam.Model;
 
 import java.io.Serializable;
 

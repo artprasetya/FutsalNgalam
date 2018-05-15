@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuProfil;
+package com.example.asus.futsalngalam.Model;
 
 /**
  * Created by ASUS on 24-Nov-17.

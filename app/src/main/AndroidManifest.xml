@@ -49,7 +49,10 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".MenuTempatFutsal.LihatFotoActivity" />
         <activity android:name=".MenuPesanan.PilihRekeningActivity" />
-        <activity android:name=".MenuPesanan.DetailPesananActivity"></activity>
+        <activity android:name=".MenuPesanan.DetailPesananActivity" />
+        <activity android:name=".MenuPesanan.DaftarPesananActivity" />
+        <activity android:name=".MenuPesanan.BeriUlasanActivity" />
+        <activity android:name=".MenuTempatFutsal.LihatUlasanActivity"></activity>
     </application>
 
 </manifest>

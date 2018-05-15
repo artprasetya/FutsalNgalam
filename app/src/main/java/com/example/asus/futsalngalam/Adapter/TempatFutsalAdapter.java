@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuTempatFutsal.Adapter;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.asus.futsalngalam.MenuTempatFutsal.DetailTempatFutsalActivity;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.TempatFutsal;
+import com.example.asus.futsalngalam.Model.TempatFutsal;
 import com.example.asus.futsalngalam.R;
 
 import java.util.List;

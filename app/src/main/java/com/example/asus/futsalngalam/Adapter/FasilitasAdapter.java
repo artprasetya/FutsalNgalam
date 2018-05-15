@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuTempatFutsal.Adapter;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Fasilitas;
+import com.example.asus.futsalngalam.Model.Fasilitas;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

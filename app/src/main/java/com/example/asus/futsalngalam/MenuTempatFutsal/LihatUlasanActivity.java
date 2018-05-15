@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuBeranda;
+package com.example.asus.futsalngalam.MenuTempatFutsal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.asus.futsalngalam.Model.TempatFutsal;
-import com.example.asus.futsalngalam.Adapter.TempatFutsalAdapter;
+import com.example.asus.futsalngalam.Adapter.UlasanAdapter;
+import com.example.asus.futsalngalam.Model.Ulasan;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BerandaActivity extends AppCompatActivity {
+public class LihatUlasanActivity extends AppCompatActivity {
+
     // Creating DatabaseReference.
     DatabaseReference dbRef;
 
@@ -36,7 +37,7 @@ public class BerandaActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     // Creating List of ImageUploadInfo class.
-    List<TempatFutsal> tempatFutsalList = new ArrayList<>();
+    List<Ulasan> ulasanList = new ArrayList<>();
 
     private FirebaseAuth auth;
     private String idPemesan;
@@ -47,7 +48,7 @@ public class BerandaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beranda);
+        setContentView(R.layout.activity_lihat_ulasan);
 
         context = this;
 
@@ -64,10 +65,10 @@ public class BerandaActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         // Setting RecyclerView layout as LinearLayout.
-        recyclerView.setLayoutManager(new LinearLayoutManager(BerandaActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(LihatUlasanActivity.this));
 
         // Assign activity this to progress dialog.
-        progressDialog = new ProgressDialog(BerandaActivity.this);
+        progressDialog = new ProgressDialog(LihatUlasanActivity.this);
 
         // Setting up message in Progress dialog.
         progressDialog.setMessage("Memuat...");
@@ -75,37 +76,30 @@ public class BerandaActivity extends AppCompatActivity {
         // Showing progress dialog.
         progressDialog.show();
 
-        getDataTempatFutsal();
+        getDataUlasan();
     }
 
-    private void getDataTempatFutsal() {
+    private void getDataUlasan() {
+        String idPetugas = getIntent().getStringExtra("idPetugas");
         //database path
-        dbRef = FirebaseDatabase.getInstance().getReference("tempatFutsal");
+        dbRef = FirebaseDatabase.getInstance().getReference("ulasan");
 
-        // Adding Add Value Event Listener to databaseReference.
-        dbRef.addValueEventListener(new ValueEventListener() {
+        dbRef.child(idPetugas).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                tempatFutsalList.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    TempatFutsal dataTempatFutsal = postSnapshot.getValue(TempatFutsal.class);
-                    tempatFutsalList.add(dataTempatFutsal);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ulasanList.clear();
+                for (DataSnapshot ulasanSnapshot : dataSnapshot.getChildren()) {
+                    Ulasan dataUlasan = ulasanSnapshot.getValue(Ulasan.class);
+                    ulasanList.add(dataUlasan);
                 }
-
-                adapter = new TempatFutsalAdapter(context, tempatFutsalList);
-
+                adapter = new UlasanAdapter(context, ulasanList);
                 recyclerView.setAdapter(adapter);
-
-                // Hiding the progress dialog.
                 progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-                // Hiding the progress dialog.
                 progressDialog.dismiss();
-
             }
         });
     }
@@ -113,7 +107,7 @@ public class BerandaActivity extends AppCompatActivity {
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Beranda");
+        getSupportActionBar().setTitle("Ulasan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

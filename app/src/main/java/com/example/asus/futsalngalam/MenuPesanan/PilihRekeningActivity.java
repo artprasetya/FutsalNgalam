@@ -7,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.asus.futsalngalam.MenuPesanan.Adapter.RekeningAdapter;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Rekening;
+import com.example.asus.futsalngalam.Adapter.RekeningAdapter;
+import com.example.asus.futsalngalam.Model.Rekening;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,7 +58,11 @@ public class PilihRekeningActivity extends AppCompatActivity {
     }
 
     private void getDataRekening() {
-        String idPetugas = getIntent().getStringExtra("idPetugas");
+        final String idPetugas = getIntent().getStringExtra("idPetugas");
+        final String idPemesan = getIntent().getStringExtra("idPemesan");
+        final String idLapangan = getIntent().getStringExtra("idLapangan");
+        final String idPesanan = getIntent().getStringExtra("idPesanan");
+
         dbRef = FirebaseDatabase.getInstance().getReference("rekening");
         // Adding Add Value Event Listener to databaseReference.
         dbRef.child(idPetugas).addValueEventListener(new ValueEventListener() {
@@ -72,7 +76,7 @@ public class PilihRekeningActivity extends AppCompatActivity {
                     rekeningList.add(rekening);
                 }
 
-                adapter = new RekeningAdapter(context, rekeningList);
+                adapter = new RekeningAdapter(context, rekeningList, idPetugas, idPemesan, idLapangan, idPesanan);
 
                 recyclerView.setAdapter(adapter);
             }

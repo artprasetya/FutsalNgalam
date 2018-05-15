@@ -7,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.asus.futsalngalam.MenuTempatFutsal.Adapter.AlbumFotoAdapter;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.AlbumFoto;
+import com.example.asus.futsalngalam.Adapter.AlbumFotoAdapter;
+import com.example.asus.futsalngalam.Model.AlbumFoto;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

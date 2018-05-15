@@ -15,9 +15,11 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.asus.futsalngalam.Model.Pemesan;
 import com.example.asus.futsalngalam.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,14 +37,11 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class UbahProfilActivity extends AppCompatActivity implements View.OnClickListener {
     //constant to track image chooser intent
     private static final int PICK_IMAGE_REQUEST = 234;
 
-    private CircleImageView circleImageView;
-
+    private ImageView fotoProfil;
     private EditText editTextNama,
             editTextAlamat,
             editTextNoTelepon;
@@ -66,13 +65,9 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubah_profil);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Ubah Profil");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setToolbar();
 
-        circleImageView = (CircleImageView) findViewById(R.id.profil);
+        fotoProfil = (ImageView) findViewById(R.id.profil);
         pilihFoto = (Button) findViewById(R.id.pilihFoto);
         simpanFoto = (Button) findViewById(R.id.simpan_foto);
         editTextNama = (EditText) findViewById(R.id.etNama);
@@ -93,6 +88,7 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
         getDataPemesan();
 
         pilihFoto.setOnClickListener(this);
+        simpanFoto.setOnClickListener(this);
         btnSimpan.setOnClickListener(this);
     }
 
@@ -106,6 +102,14 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
         } else if (v == simpanFoto) {
             simpanFoto();
         }
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Ubah Profil");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void simpanData() {
@@ -182,7 +186,7 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Pemesan dataPemesan = dataSnapshot.getValue(Pemesan.class);
                 if (dataPemesan != null) {
-                    Glide.with(getApplication()).load(dataPemesan.getFotoProfil()).into(circleImageView);
+                    Glide.with(getApplication()).load(dataPemesan.getFotoProfil()).into(fotoProfil);
                     editTextNama.setText(dataPemesan.getNama());
                     editTextAlamat.setText(dataPemesan.getAlamat());
                     editTextNoTelepon.setText(dataPemesan.getTelepon());
@@ -203,7 +207,7 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                circleImageView.setImageBitmap(bitmap);
+                fotoProfil.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }

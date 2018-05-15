@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuPesanan.Adapter;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.asus.futsalngalam.MenuPesanan.DetailPesananActivity;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Rekening;
+import com.example.asus.futsalngalam.Model.Rekening;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,11 +22,21 @@ public class RekeningAdapter extends RecyclerView.Adapter<RekeningAdapter.ViewHo
     LayoutInflater mInflater;
     private List<Rekening> rekeningList;
     private DatabaseReference dbRef;
+    String idPetugas, idPemesan, idLapangan, idPesanan;
 
     public RekeningAdapter(Context context, List<Rekening> rekeningList) {
         this.context = context;
         this.rekeningList = rekeningList;
         mInflater = LayoutInflater.from(context);
+    }
+
+    public RekeningAdapter(Context context, List<Rekening> rekeningList, String idPetugas, String idPemesan, String idLapangan, String idPesanan) {
+        this.context = context;
+        this.rekeningList = rekeningList;
+        this.idPetugas = idPetugas;
+        this.idPemesan = idPemesan;
+        this.idLapangan = idLapangan;
+        this.idPesanan = idPesanan;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +75,8 @@ public class RekeningAdapter extends RecyclerView.Adapter<RekeningAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailPesananActivity.class);
+                intent.putExtra("idPesanan", idPesanan);
+                intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("idPetugas", idPetugas);
                 intent.putExtra("idRekening", idRekening);
                 intent.putExtra("namaRekening", namaRekening);

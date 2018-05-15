@@ -14,11 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Adapter.FasilitasAdapter;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Adapter.LapanganAdapter;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Fasilitas;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.Lapangan;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.TempatFutsal;
+import com.example.asus.futsalngalam.Adapter.FasilitasAdapter;
+import com.example.asus.futsalngalam.Adapter.LapanganAdapter;
+import com.example.asus.futsalngalam.Model.Fasilitas;
+import com.example.asus.futsalngalam.Model.Lapangan;
+import com.example.asus.futsalngalam.Model.TempatFutsal;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +41,7 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
     private ImageView whatsapp;
     private ImageView mapView;
     private Button btn_foto;
+    private Button btn_ulasan;
 
     // Creating RecyclerView.
     RecyclerView recyclerViewFasilitas, recyclerViewLapangan;
@@ -75,12 +76,13 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
         recyclerViewFasilitas.setLayoutManager(new LinearLayoutManager(DetailTempatFutsalActivity.this));
         recyclerViewLapangan.setLayoutManager(new LinearLayoutManager(DetailTempatFutsalActivity.this));
 
-        imageView = (ImageView) findViewById(R.id.imageView);
-        mapView = (ImageView) findViewById(R.id.maps);
-        whatsapp = (ImageView) findViewById(R.id.whatsapp);
-        tvKontak = (TextView) findViewById(R.id.tvKontak);
-        tvDeskripsi = (TextView) findViewById(R.id.tvDeskripsi);
-        btn_foto = (Button) findViewById(R.id.btn_foto);
+        imageView = findViewById(R.id.imageView);
+        mapView = findViewById(R.id.maps);
+        whatsapp = findViewById(R.id.whatsapp);
+        tvKontak = findViewById(R.id.tvKontak);
+        tvDeskripsi = findViewById(R.id.tvDeskripsi);
+        btn_foto = findViewById(R.id.btn_foto);
+        btn_ulasan = findViewById(R.id.btn_ulasan);
 
         getDataFutsal();
         getDataFasilitas();
@@ -108,6 +110,12 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gotoFoto();
+            }
+        });
+        btn_ulasan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoUlasan();
             }
         });
     }
@@ -164,6 +172,13 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void gotoUlasan() {
+        String idPetugas = getIntent().getStringExtra("idPetugas");
+        Intent intent = new Intent(this, LihatUlasanActivity.class);
+        intent.putExtra("idPetugas", idPetugas);
+        startActivity(intent);
     }
 
     private void gotoFoto() {

@@ -9,7 +9,7 @@ import android.widget.GridView;
 
 import com.example.asus.futsalngalam.MenuAutentikasi.LoginActivity;
 import com.example.asus.futsalngalam.MenuBeranda.BerandaActivity;
-import com.example.asus.futsalngalam.MenuPesanan.BuatPesananActivity;
+import com.example.asus.futsalngalam.MenuPesanan.DaftarPesananActivity;
 import com.example.asus.futsalngalam.MenuProfil.ProfilActivity;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         androidGridView = (GridView) findViewById(R.id.grid_view);
         androidGridView.setAdapter(adapterViewAndroid);
 
-
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         view.getContext().startActivity(b);
                         break;
                     case 2:
-                        Intent c = new Intent(view.getContext(), BuatPesananActivity.class);
+                        Intent c = new Intent(view.getContext(), DaftarPesananActivity.class);
                         view.getContext().startActivity(c);
                         break;
                     case 3:

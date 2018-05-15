@@ -22,4 +22,9 @@
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#ffdd00</item>
+        <item name="colorControlActivated">#ffdd00</item>
+    </style>
+
 </resources>

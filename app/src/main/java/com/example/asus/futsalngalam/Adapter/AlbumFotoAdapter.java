@@ -1,4 +1,4 @@
-package com.example.asus.futsalngalam.MenuTempatFutsal.Adapter;
+package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.asus.futsalngalam.MenuTempatFutsal.Model.AlbumFoto;
+import com.example.asus.futsalngalam.Model.AlbumFoto;
 import com.example.asus.futsalngalam.R;
 
 import java.util.List;

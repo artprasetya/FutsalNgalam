@@ -48,10 +48,11 @@
             android:background="@color/colorOrange" />
 
         <TextView
+            android:id="@+id/namaTempatFutsal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Form Pesan Lapangan"
+            android:text="Nama Tempat Futsal"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/colorPrimaryDark"
@@ -84,7 +85,7 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/tvNamaPemesan"
+                android:id="@+id/namaPemesan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,7 +95,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvNomorTelepon"
+                android:id="@+id/nomorTelepon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,107 +118,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="15dp"
-            android:text="Tempat Futsal"
+            android:text="Rating"
             android:textColor="@color/colorBlack"
             android:textSize="15sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:weightSum="2">
+            android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/tvTempatFutsal"
+            <RatingBar
+                android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tempat Futsal"
-                android:textAlignment="viewStart"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvNamaLapangan"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Nama Lapangan"
-                android:textAlignment="viewEnd"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="103dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Tanggal : "
-                android:textColor="@color/colorBlack"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Jam mulai :"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/selesai"
-                android:text="Jam selesai :"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:weightSum="3">
-
-            <TextView
-                android:id="@+id/tvTanggalPesan"
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/ic_date_range_black_24dp"
-                android:textSize="15sp" />
-
-            <Spinner
-                android:id="@+id/jamMulai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center" />
-
-            <Spinner
-                android:id="@+id/jamSelesai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center" />
+                android:numStars="5"
+                android:rating="2.5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar" />
 
         </LinearLayout>
 
@@ -234,12 +155,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
-            android:text="Tambahkan Catatan"
+            android:text="Ulasan"
             android:textColor="@color/colorBlack"
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/etCatatan"
+            android:id="@+id/etUlasan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -256,12 +177,12 @@
             android:background="@color/colorGrey" />
 
         <Button
-            android:id="@+id/btnCek"
+            android:id="@+id/btnSimpan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorOrange"
-            android:text="Cek Jadwal"
+            android:text="Simpan"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
 
@@ -279,24 +200,5 @@
             android:layout_width="match_parent"
             android:layout_height="9dp"
             android:background="@color/colorPrimaryDark" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_action"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <Button
-            android:id="@+id/btnPembayaran"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorOrange"
-            android:text="Lanjut ke pembayaran"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

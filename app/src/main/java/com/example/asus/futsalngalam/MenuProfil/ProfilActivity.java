@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.asus.futsalngalam.Model.Pemesan;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,12 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfilActivity extends AppCompatActivity {
 
     private DatabaseReference dbRef;
 
+    private ImageView fotoProfil;
     private TextView textViewNama,
             textViewNoTelepon,
             textViewAlamat;
@@ -33,8 +34,6 @@ public class ProfilActivity extends AppCompatActivity {
     private String idPemesan;
     private Toolbar toolbar;
 
-    private CircleImageView circleImageView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         setToolbar();
 
-        circleImageView = (CircleImageView) findViewById(R.id.fotoProfil);
+        fotoProfil = (ImageView) findViewById(R.id.fotoProfil);
         textViewNama = (TextView) findViewById(R.id.tvNama);
         textViewAlamat = (TextView) findViewById(R.id.tvAlamat);
         textViewNoTelepon = (TextView) findViewById(R.id.tvNotelp);
@@ -78,7 +77,7 @@ public class ProfilActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Pemesan dataPemesan = dataSnapshot.getValue(Pemesan.class);
                 if (dataPemesan != null) {
-                    Glide.with(getApplication()).load(dataPemesan.getFotoProfil()).into(circleImageView);
+                    Glide.with(getApplication()).load(dataPemesan.getFotoProfil()).into(fotoProfil);
                     textViewNama.setText(dataPemesan.getNama());
                     textViewAlamat.setText(dataPemesan.getAlamat());
                     textViewNoTelepon.setText(dataPemesan.getTelepon());
