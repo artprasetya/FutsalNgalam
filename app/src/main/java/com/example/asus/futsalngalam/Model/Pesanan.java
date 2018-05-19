@@ -12,12 +12,18 @@ public class Pesanan {
             namaTempatFutsal,
             namaLapangan,
             tanggalPesan,
-            catatan, jamMulai, jamSelesai;
+            catatan,
+            jamMulai,
+            jamSelesai,
+            invoice,
+            timestamp;
+
+    double totalPembayaran;
 
     public Pesanan() {
     }
 
-    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String catatan, String jamMulai, String jamSelesai) {
+    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String catatan, String jamMulai, String jamSelesai, String invoice, String timestamp, double totalPembayaran) {
         this.idPetugas = idPetugas;
         this.idPesanan = idPesanan;
         this.idPemesan = idPemesan;
@@ -31,6 +37,33 @@ public class Pesanan {
         this.catatan = catatan;
         this.jamMulai = jamMulai;
         this.jamSelesai = jamSelesai;
+        this.invoice = invoice;
+        this.timestamp = timestamp;
+        this.totalPembayaran = totalPembayaran;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public double getTotalPembayaran() {
+        return totalPembayaran;
+    }
+
+    public void setTotalPembayaran(double totalPembayaran) {
+        this.totalPembayaran = totalPembayaran;
     }
 
     public String getIdPetugas() {

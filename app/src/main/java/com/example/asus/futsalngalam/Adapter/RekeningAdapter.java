@@ -74,6 +74,12 @@ public class RekeningAdapter extends RecyclerView.Adapter<RekeningAdapter.ViewHo
         holder.tvNamaBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(idRekening);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(namaBank);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(nomorRekening);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(namaRekening);
+
                 Intent intent = new Intent(context, DetailPesananActivity.class);
                 intent.putExtra("idPesanan", idPesanan);
                 intent.putExtra("idLapangan", idLapangan);

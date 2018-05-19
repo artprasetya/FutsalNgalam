@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class BeriUlasanActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -31,6 +34,9 @@ public class BeriUlasanActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private String idPemesan;
     private String idUlasan;
+    private Calendar calander;
+    private SimpleDateFormat simpledateformat;
+    private String Date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,10 @@ public class BeriUlasanActivity extends AppCompatActivity {
         idPemesan = user.getUid();
         idUlasan = dbRef.push().getKey();
 
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Date = simpledateformat.format(calander.getTime());
+
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -67,8 +77,14 @@ public class BeriUlasanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 simpanUlasan();
                 String idPesanan = getIntent().getStringExtra("idPesanan");
+                String namaBank = getIntent().getStringExtra("namaBank");
+                String nomorRekening = getIntent().getStringExtra("nomorRekening");
+                String namaRekening = getIntent().getStringExtra("namaRekening");
                 Intent intent = new Intent(BeriUlasanActivity.this, DetailPesananActivity.class);
                 intent.putExtra("idPesanan", idPesanan);
+                intent.putExtra("namaBank", namaBank);
+                intent.putExtra("nomorRekening", nomorRekening);
+                intent.putExtra("namaRekening", namaRekening);
                 startActivity(intent);
             }
         });
@@ -95,6 +111,7 @@ public class BeriUlasanActivity extends AppCompatActivity {
         dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("nomorTelepon").setValue(telepon);
         dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("rating").setValue(rating);
         dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("ulasan").setValue(ulasan);
+        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("timestamp").setValue(Date);
     }
 
     private void getDataPemesan() {

@@ -4,9 +4,9 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
@@ -31,13 +31,13 @@
             android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorOrange"
             android:id="@+id/tvRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Rating"
             android:textAlignment="viewEnd"
+            android:textColor="@color/colorOrange"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -51,7 +51,6 @@
         android:background="@color/colorGrey" />
 
     <TextView
-        android:textSize="20sp"
         android:id="@+id/tvUlasan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,5 +58,44 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/garis2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvUlasan"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorGrey" />
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/garis2"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="tanggal waktu"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
 </RelativeLayout>

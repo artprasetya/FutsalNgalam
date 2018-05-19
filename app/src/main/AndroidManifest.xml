@@ -52,7 +52,8 @@
         <activity android:name=".MenuPesanan.DetailPesananActivity" />
         <activity android:name=".MenuPesanan.DaftarPesananActivity" />
         <activity android:name=".MenuPesanan.BeriUlasanActivity" />
-        <activity android:name=".MenuTempatFutsal.LihatUlasanActivity"></activity>
+        <activity android:name=".MenuTempatFutsal.LihatUlasanActivity" />
+        <activity android:name=".MenuPesanan.UnggahBuktiActivity"></activity>
     </application>
 
 </manifest>

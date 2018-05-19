@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Ulasan implements Serializable {
 
-    String idPetugas, idUlasan, idPesanan, idPemesan, namaPemesan, nomorTelepon, ulasan, rating;
+    String idPetugas, idUlasan, idPesanan, idPemesan, namaPemesan, nomorTelepon, ulasan, rating, timestamp;
 
     public Ulasan() {
     }
 
-    public Ulasan(String idPetugas, String idUlasan, String idPesanan, String idPemesan, String namaPemesan, String nomorTelepon, String ulasan, String rating) {
+    public Ulasan(String idPetugas, String idUlasan, String idPesanan, String idPemesan, String namaPemesan, String nomorTelepon, String ulasan, String rating, String timestamp) {
         this.idPetugas = idPetugas;
         this.idUlasan = idUlasan;
         this.idPesanan = idPesanan;
@@ -18,6 +18,15 @@ public class Ulasan implements Serializable {
         this.nomorTelepon = nomorTelepon;
         this.ulasan = ulasan;
         this.rating = rating;
+        this.timestamp = timestamp;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getRating() {

@@ -39,6 +39,8 @@ public class BuatPesananActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private String idPemesan;
     private String idPesanan;
+    private String invoice;
+    private String timestamp;
     private TextView namaPemesan;
     private TextView nomorPemesan;
     private TextView namaTempatFutsal;
@@ -51,6 +53,8 @@ public class BuatPesananActivity extends AppCompatActivity {
     private boolean jadwal = false;
     private boolean jam = false;
     private boolean tgl = false;
+    private int durasi;
+    private double totalPembayaran;
     private ProgressDialog mProgress;
 
     //DatePicker
@@ -62,6 +66,9 @@ public class BuatPesananActivity extends AppCompatActivity {
     private Spinner spinnerSelesai;
     private Integer[] jamMulai = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
     private Integer[] jamSelesai = {7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+
+    private Calendar calander;
+    private SimpleDateFormat simpledateformat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +108,9 @@ public class BuatPesananActivity extends AppCompatActivity {
         });
 
         getDataPesanan();
+        setTimestamp();
+        buatInvoice();
+        totalPembayaran();
 
         btnCekJadwal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,10 +148,25 @@ public class BuatPesananActivity extends AppCompatActivity {
         });
     }
 
+    private void setTimestamp() {
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        timestamp = simpledateformat.format(calander.getTime());
+    }
+
+    private void buatInvoice() {
+        String Date;
+
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("ddMMyyyyHHmm");
+        Date = simpledateformat.format(calander.getTime());
+
+        invoice = ("#FNINVC" + Date);
+    }
+
     private void buatPesanan() {
         String idPetugas = getIntent().getStringExtra("idPetugas");
         String idLapangan = getIntent().getStringExtra("idLapangan");
-        String hargaSewa = getIntent().getStringExtra("hargaSewa");
         String pemesan = namaPemesan.getText().toString();
         String noTelpon = nomorPemesan.getText().toString();
         String tempatFutsal = namaTempatFutsal.getText().toString();
@@ -165,6 +190,9 @@ public class BuatPesananActivity extends AppCompatActivity {
         dbRef.child("pesanan").child(idPesanan).child("jamMulai").setValue(jamMulai);
         dbRef.child("pesanan").child(idPesanan).child("jamSelesai").setValue(jamSelesai);
         dbRef.child("pesanan").child(idPesanan).child("catatan").setValue(getCatatan);
+        dbRef.child("pesanan").child(idPesanan).child("totalPembayaran").setValue(totalPembayaran);
+        dbRef.child("pesanan").child(idPesanan).child("invoice").setValue(invoice);
+        dbRef.child("pesanan").child(idPesanan).child("timestamp").setValue(timestamp);
     }
 
     private boolean cekJadwal() {
@@ -202,6 +230,39 @@ public class BuatPesananActivity extends AppCompatActivity {
             }
         });
         return jadwal;
+    }
+
+    private double totalPembayaran() {
+        String idPetugas = getIntent().getStringExtra("idPetugas");
+        String idLapangan = getIntent().getStringExtra("idLapangan");
+
+        dbRef.child("lapangan").child(idPetugas).child(idLapangan).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Lapangan dataLapangan = dataSnapshot.getValue(Lapangan.class);
+                assert dataLapangan != null;
+                hitungDurasi();
+                double hargaSewa = dataLapangan.getHargaSewa();
+                double total;
+
+                total = durasi * hargaSewa;
+                totalPembayaran = total;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return totalPembayaran;
+    }
+
+    private void hitungDurasi() {
+        int jamMulai = (int) spinnerMulai.getSelectedItem();
+        int jamSelesai = (int) spinnerSelesai.getSelectedItem();
+        int hasil = jamSelesai - jamMulai;
+        durasi = hasil;
     }
 
     private boolean cekTanggal() {

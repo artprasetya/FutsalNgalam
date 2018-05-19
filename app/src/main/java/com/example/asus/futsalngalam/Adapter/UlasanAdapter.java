@@ -29,12 +29,14 @@ public class UlasanAdapter extends RecyclerView.Adapter<UlasanAdapter.ViewHolder
         TextView rating;
         TextView namaPemesan;
         TextView ulasan;
+        TextView timestamp;
 
         public ViewHolder(View itemView) {
             super(itemView);
             namaPemesan = itemView.findViewById(R.id.tvNamaPemesan);
             rating = itemView.findViewById(R.id.tvRating);
             ulasan = itemView.findViewById(R.id.tvUlasan);
+            timestamp = itemView.findViewById(R.id.tvTimestamp);
         }
     }
 
@@ -50,10 +52,12 @@ public class UlasanAdapter extends RecyclerView.Adapter<UlasanAdapter.ViewHolder
         final String namaPemesan = ulasanList.get(position).getNamaPemesan();
         final String rating = ulasanList.get(position).getRating();
         final String ulasan = ulasanList.get(position).getUlasan();
+        final String timestamp = ulasanList.get(position).getTimestamp();
 
         holder.namaPemesan.setText(namaPemesan);
         holder.rating.setText("Nilai " + rating + "/5");
         holder.ulasan.setText(ulasan);
+        holder.timestamp.setText(timestamp);
     }
 
     @Override

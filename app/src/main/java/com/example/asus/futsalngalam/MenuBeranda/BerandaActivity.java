@@ -8,8 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.asus.futsalngalam.Model.TempatFutsal;
 import com.example.asus.futsalngalam.Adapter.TempatFutsalAdapter;
+import com.example.asus.futsalngalam.Model.TempatFutsal;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
