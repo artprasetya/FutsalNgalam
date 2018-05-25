@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Lapangan implements Serializable {
     String idLapangan, idPetugas, namaLapangan, kategori;
-    double hargaSewa;
+    int hargaSewa;
 
     public Lapangan() {
     }
 
-    public Lapangan(String idLapangan, String idPetugas, String namaLapangan, String kategori, double hargaSewa) {
+    public Lapangan(String idLapangan, String idPetugas, String namaLapangan, String kategori, int hargaSewa) {
         this.idLapangan = idLapangan;
         this.idPetugas = idPetugas;
         this.namaLapangan = namaLapangan;
@@ -49,11 +49,11 @@ public class Lapangan implements Serializable {
         this.kategori = kategori;
     }
 
-    public double getHargaSewa() {
+    public int getHargaSewa() {
         return hargaSewa;
     }
 
-    public void setHargaSewa(double hargaSewa) {
+    public void setHargaSewa(int hargaSewa) {
         this.hargaSewa = hargaSewa;
     }
 }

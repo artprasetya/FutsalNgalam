@@ -14,7 +14,7 @@ import com.example.asus.futsalngalam.R;
 
 import java.util.List;
 
-public class AlbumFotoAdapter extends RecyclerView.Adapter<AlbumFotoAdapter.ViewHolder>{
+public class AlbumFotoAdapter extends RecyclerView.Adapter<AlbumFotoAdapter.ViewHolder> {
 
     Context context;
     List<AlbumFoto> albumFotoList;

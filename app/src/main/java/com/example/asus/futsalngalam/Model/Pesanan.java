@@ -12,7 +12,6 @@ public class Pesanan {
             namaTempatFutsal,
             namaLapangan,
             tanggalPesan,
-            catatan,
             jamMulai,
             jamSelesai,
             invoice,
@@ -23,7 +22,7 @@ public class Pesanan {
     public Pesanan() {
     }
 
-    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String catatan, String jamMulai, String jamSelesai, String invoice, String timestamp, double totalPembayaran) {
+    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String jamMulai, String jamSelesai, String invoice, String timestamp, double totalPembayaran) {
         this.idPetugas = idPetugas;
         this.idPesanan = idPesanan;
         this.idPemesan = idPemesan;
@@ -34,7 +33,6 @@ public class Pesanan {
         this.namaTempatFutsal = namaTempatFutsal;
         this.namaLapangan = namaLapangan;
         this.tanggalPesan = tanggalPesan;
-        this.catatan = catatan;
         this.jamMulai = jamMulai;
         this.jamSelesai = jamSelesai;
         this.invoice = invoice;
@@ -144,14 +142,6 @@ public class Pesanan {
 
     public void setTanggalPesan(String tanggalPesan) {
         this.tanggalPesan = tanggalPesan;
-    }
-
-    public String getCatatan() {
-        return catatan;
-    }
-
-    public void setCatatan(String catatan) {
-        this.catatan = catatan;
     }
 
     public String getJamMulai() {

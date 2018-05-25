@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.asus.futsalngalam.Model.Pesanan;
 import com.example.asus.futsalngalam.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DetailPesananActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private TextView invoice;
     private TextView statusPesanan;
     private TextView namaPemesan;
     private TextView nomorTelepon;
@@ -35,8 +34,6 @@ public class DetailPesananActivity extends AppCompatActivity {
     private Button btnUnggah;
     private Button btnUlasan;
     private DatabaseReference dbRef;
-    private FirebaseAuth auth;
-    private String idPemesan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +42,7 @@ public class DetailPesananActivity extends AppCompatActivity {
 
         setToolbar();
 
+        invoice = findViewById(R.id.tvInvoice);
         statusPesanan = (TextView) findViewById(R.id.tvStatus);
         namaPemesan = (TextView) findViewById(R.id.tvNamaPemesan);
         nomorTelepon = (TextView) findViewById(R.id.tvNomorPemesan);
@@ -58,12 +56,6 @@ public class DetailPesananActivity extends AppCompatActivity {
         tvNamaRekening = (TextView) findViewById(R.id.tvNamaRekening);
         btnUnggah = (Button) findViewById(R.id.btnUnggahBukti);
         btnUlasan = (Button) findViewById(R.id.btnBeriUlasan);
-
-        dbRef = FirebaseDatabase.getInstance().getReference();
-
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        idPemesan = user.getUid();
 
         getDataPesanan();
 
@@ -91,12 +83,13 @@ public class DetailPesananActivity extends AppCompatActivity {
         tvNomorRekening.setText(nomorRekening);
         tvNamaRekening.setText(namaRekening);
 
+        dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                Pesanan dataPesanan = dataSnapshot.getValue(Pesanan.class);
-                Pesanan dataPesanan =dataSnapshot.getValue(Pesanan.class);
+                Pesanan dataPesanan = dataSnapshot.getValue(Pesanan.class);
                 if (dataPesanan != null) {
+                    invoice.setText(dataPesanan.getInvoice());
                     statusPesanan.setText(dataPesanan.getStatusPesanan());
                     namaPemesan.setText(dataPesanan.getNamaPemesan());
                     nomorTelepon.setText(dataPesanan.getNoTelepon());
@@ -104,7 +97,7 @@ public class DetailPesananActivity extends AppCompatActivity {
                     namaLapangan.setText(dataPesanan.getNamaLapangan());
                     tanggalPesan.setText(dataPesanan.getTanggalPesan());
                     durasiSewa.setText("Jam " + (dataPesanan.getJamMulai() + " - " + (dataPesanan.getJamSelesai() + " WIB")));
-                    totalPembayaran.setText(String.valueOf(dataPesanan.getTotalPembayaran()));
+                    totalPembayaran.setText("Rp. " + String.valueOf(dataPesanan.getTotalPembayaran()));
                 }
             }
 

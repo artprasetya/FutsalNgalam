@@ -60,7 +60,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -68,7 +67,7 @@
                         android:id="@+id/btn_foto"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+
                         android:layout_marginRight="2.5dp"
                         android:layout_weight="1"
                         android:background="@color/colorOrange"
@@ -81,7 +80,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2.5dp"
-                        android:layout_marginRight="5dp"
+
                         android:layout_weight="1"
                         android:background="@color/colorOrange"
                         android:text="Lihat Ulasan"
@@ -93,27 +92,35 @@
                     android:id="@+id/layout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/colorWhite"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorOrange"
+                        android:paddingBottom="5dp"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
                         android:text="Deskripsi : "
-                        android:textSize="18dp"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvDeskripsi"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:background="@null"
                         android:overScrollMode="ifContentScrolls"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp" />
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Deskripsi"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="fill_parent"
@@ -123,9 +130,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorOrange"
+                        android:paddingBottom="5dp"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
                         android:text="Fasilitas : "
+                        android:textColor="@color/colorWhite"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -142,9 +152,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorOrange"
+                        android:paddingBottom="5dp"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
                         android:text="Kontak : "
+                        android:textColor="@color/colorWhite"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -152,7 +165,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:orientation="horizontal">
 
                         <ImageView

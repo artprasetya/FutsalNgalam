@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="5dp"
         android:weightSum="1">
 
         <TextView

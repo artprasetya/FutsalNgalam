@@ -59,10 +59,10 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
         final String idLapangan = lapanganList.get(position).getIdLapangan();
         final String idPetugas = lapanganList.get(position).getIdPetugas();
         final String namaLapangan = lapanganList.get(position).getNamaLapangan();
-        final double hargaSewa = lapanganList.get(position).getHargaSewa();
+        final int hargaSewa = lapanganList.get(position).getHargaSewa();
 
         holder.tvNamaLapangan.setText(namaLapangan);
-        holder.tvHarga.setText("Rp. " + String.valueOf(hargaSewa));
+        holder.tvHarga.setText("Rp. " + String.valueOf(hargaSewa) + ",-");
 
         holder.tvNamaLapangan.setOnClickListener(new View.OnClickListener() {
             @Override

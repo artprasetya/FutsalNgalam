@@ -33,7 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout1"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorWhite"
             android:orientation="vertical">
 
@@ -59,43 +61,30 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/colorGrey" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/label"
+            <EditText
+                android:id="@+id/etNamaRekening"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorBlack"
+                android:hint="Nama Rekening Pemesan"
+                android:maxLines="1"
+                android:textColor="@color/colorBlack" />
 
-                <EditText
-                    android:id="@+id/etNamaRekening"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
-                    android:hint="Nama Rekening"
-                    android:maxLines="1"
-                    android:textColorHint="@color/colorBlack" />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/label2"
+            <EditText
+                android:id="@+id/etNomorRekening"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp">
-
-                <EditText
-                    android:id="@+id/etNomorRekening"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBlack"
-                    android:hint="Nomor Rekening"
-                    android:maxLines="1"
-                    android:textColorHint="@color/colorBlack" />
-
-            </android.support.design.widget.TextInputLayout>
+                android:backgroundTint="@color/colorBlack"
+                android:hint="Nomor Rekening Pemesan"
+                android:maxLines="1"
+                android:textColor="@color/colorBlack" />
 
             <View
                 android:layout_width="match_parent"
@@ -129,6 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:buttonTint="@color/colorOrange"
                     android:text="Lunas" />
 
                 <RadioButton
@@ -136,6 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:buttonTint="@color/colorOrange"
                     android:text="Uang Muka" />
             </RadioGroup>
 
@@ -160,9 +151,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nominal"
+                    android:text="Nominal Transfer"
                     android:textAlignment="viewStart"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -172,7 +163,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorGrey"
                     android:paddingRight="10dp"
-                    android:text="Nominal"
+                    android:text="-"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"

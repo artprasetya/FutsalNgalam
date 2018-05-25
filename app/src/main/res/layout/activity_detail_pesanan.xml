@@ -26,14 +26,17 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout1">
+        android:layout_below="@+id/layout1"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout1"
-            android:layout_margin="15dp"
             android:background="@color/colorWhite"
             android:orientation="vertical">
 
@@ -53,11 +56,15 @@
                 android:background="@color/colorOrange" />
 
             <TextView
+                android:id="@+id/tvInvoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Futsal Ngalam"
+                android:text="Invoice"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
@@ -70,6 +77,15 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/colorBlack" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:text="Status Pesanan"
+                android:textSize="18sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,15 +93,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Status Pesanan"
-                    android:textAlignment="viewStart"
-                    android:textSize="18sp" />
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/tvStatus"
@@ -93,8 +101,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorGrey"
-                    android:text="Belum Bayar"
-                    android:textAlignment="viewEnd"
+                    android:text="status"
+                    android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -277,26 +285,15 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/colorGrey"
-                    android:text=""
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/tvTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@color/colorGrey"
                     android:text="Nominal"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

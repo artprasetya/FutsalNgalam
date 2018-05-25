@@ -1,12 +1,14 @@
 package com.example.asus.futsalngalam.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.asus.futsalngalam.MenuPesanan.DetailPesananActivity;
 import com.example.asus.futsalngalam.Model.Pesanan;
 import com.example.asus.futsalngalam.R;
 
@@ -46,8 +48,10 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Pesanan dataPesanan = listPesanan.get(position);
+        final String idPesanan = dataPesanan.getIdPesanan();
         final String status = dataPesanan.getStatusPesanan();
         final String invoice = dataPesanan.getInvoice();
+
 
         holder.status.setText(status);
         holder.invoice.setText(invoice);
@@ -55,14 +59,18 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, DetailPesananActivity.class);
+                intent.putExtra("idPesanan", idPesanan);
+                context.startActivity(intent);
             }
         });
 
         holder.invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, DetailPesananActivity.class);
+                intent.putExtra("idPesanan", idPesanan);
+                context.startActivity(intent);
             }
         });
     }

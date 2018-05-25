@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,12 +39,10 @@ public class BuatPesananActivity extends AppCompatActivity {
     private String idPemesan;
     private String idPesanan;
     private String invoice;
-    private String timestamp;
     private TextView namaPemesan;
     private TextView nomorPemesan;
     private TextView namaTempatFutsal;
     private TextView namaLapangan;
-    private EditText catatan;
     private Button btnCekJadwal;
     private Button btnPembayaran;
     private FirebaseAuth auth;
@@ -53,8 +50,7 @@ public class BuatPesananActivity extends AppCompatActivity {
     private boolean jadwal = false;
     private boolean jam = false;
     private boolean tgl = false;
-    private int durasi;
-    private double totalPembayaran;
+    private int totalPembayaran;
     private ProgressDialog mProgress;
 
     //DatePicker
@@ -85,18 +81,14 @@ public class BuatPesananActivity extends AppCompatActivity {
         tanggalPesan = findViewById(R.id.tvTanggalPesan);
         spinnerMulai = findViewById(R.id.jamMulai);
         spinnerSelesai = findViewById(R.id.jamSelesai);
-        catatan = findViewById(R.id.etCatatan);
         btnCekJadwal = findViewById(R.id.btnCek);
         btnPembayaran = findViewById(R.id.btnPembayaran);
 
         setSpinner();
 
-        dbRef = FirebaseDatabase.getInstance().getReference();
-
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         idPemesan = user.getUid();
-        idPesanan = dbRef.push().getKey();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -108,9 +100,7 @@ public class BuatPesananActivity extends AppCompatActivity {
         });
 
         getDataPesanan();
-        setTimestamp();
         buatInvoice();
-        totalPembayaran();
 
         btnCekJadwal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,20 +138,22 @@ public class BuatPesananActivity extends AppCompatActivity {
         });
     }
 
-    private void setTimestamp() {
-        calander = Calendar.getInstance();
-        simpledateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        timestamp = simpledateformat.format(calander.getTime());
-    }
-
     private void buatInvoice() {
         String Date;
-
         calander = Calendar.getInstance();
         simpledateformat = new SimpleDateFormat("ddMMyyyyHHmm");
         Date = simpledateformat.format(calander.getTime());
+        invoice = ("FNINVC" + Date);
+    }
 
-        invoice = ("#FNINVC" + Date);
+    private int totalPembayaran() {
+        Integer hargaSewa = getIntent().getIntExtra("hargaSewa", 0);
+        int jamMulai = Integer.parseInt(String.valueOf(spinnerMulai.getSelectedItem()));
+        int jamSelesai = Integer.parseInt(String.valueOf(spinnerSelesai.getSelectedItem()));
+        int durasi = jamSelesai - jamMulai;
+        int total = durasi * hargaSewa;
+        totalPembayaran = total;
+        return totalPembayaran;
     }
 
     private void buatPesanan() {
@@ -174,25 +166,29 @@ public class BuatPesananActivity extends AppCompatActivity {
         String tglPesan = tanggalPesan.getText().toString();
         String jamMulai = spinnerMulai.getSelectedItem().toString();
         String jamSelesai = spinnerSelesai.getSelectedItem().toString();
-        String getCatatan = catatan.getText().toString();
         String statusPesanan = "Belum Bayar";
+        idPesanan = dbRef.push().getKey();
 
-        dbRef.child("pesanan").child(idPesanan).child("idPesanan").setValue(idPesanan);
-        dbRef.child("pesanan").child(idPesanan).child("idPetugas").setValue(idPetugas);
-        dbRef.child("pesanan").child(idPesanan).child("idPemesan").setValue(idPemesan);
-        dbRef.child("pesanan").child(idPesanan).child("idLapangan").setValue(idLapangan);
-        dbRef.child("pesanan").child(idPesanan).child("statusPesanan").setValue(statusPesanan);
-        dbRef.child("pesanan").child(idPesanan).child("namaPemesan").setValue(pemesan);
-        dbRef.child("pesanan").child(idPesanan).child("noTelepon").setValue(noTelpon);
-        dbRef.child("pesanan").child(idPesanan).child("namaTempatFutsal").setValue(tempatFutsal);
-        dbRef.child("pesanan").child(idPesanan).child("namaLapangan").setValue(lapangan);
-        dbRef.child("pesanan").child(idPesanan).child("tanggalPesan").setValue(tglPesan);
-        dbRef.child("pesanan").child(idPesanan).child("jamMulai").setValue(jamMulai);
-        dbRef.child("pesanan").child(idPesanan).child("jamSelesai").setValue(jamSelesai);
-        dbRef.child("pesanan").child(idPesanan).child("catatan").setValue(getCatatan);
-        dbRef.child("pesanan").child(idPesanan).child("totalPembayaran").setValue(totalPembayaran);
-        dbRef.child("pesanan").child(idPesanan).child("invoice").setValue(invoice);
-        dbRef.child("pesanan").child(idPesanan).child("timestamp").setValue(timestamp);
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String timestamp = simpledateformat.format(calander.getTime());
+
+        dbRef = FirebaseDatabase.getInstance().getReference().child("pesanan").child(idPesanan);
+        dbRef.child("idPesanan").setValue(idPesanan);
+        dbRef.child("idPetugas").setValue(idPetugas);
+        dbRef.child("idPemesan").setValue(idPemesan);
+        dbRef.child("idLapangan").setValue(idLapangan);
+        dbRef.child("statusPesanan").setValue(statusPesanan);
+        dbRef.child("namaPemesan").setValue(pemesan);
+        dbRef.child("noTelepon").setValue(noTelpon);
+        dbRef.child("namaTempatFutsal").setValue(tempatFutsal);
+        dbRef.child("namaLapangan").setValue(lapangan);
+        dbRef.child("tanggalPesan").setValue(tglPesan);
+        dbRef.child("jamMulai").setValue(jamMulai);
+        dbRef.child("jamSelesai").setValue(jamSelesai);
+        dbRef.child("totalPembayaran").setValue(totalPembayaran());
+        dbRef.child("invoice").setValue(invoice);
+        dbRef.child("timestamp").setValue(timestamp);
     }
 
     private boolean cekJadwal() {
@@ -204,6 +200,7 @@ public class BuatPesananActivity extends AppCompatActivity {
         final String jamSelesai = spinnerSelesai.getSelectedItem().toString();
 
         mProgress.show();
+        dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.child("pesanan").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -230,39 +227,6 @@ public class BuatPesananActivity extends AppCompatActivity {
             }
         });
         return jadwal;
-    }
-
-    private double totalPembayaran() {
-        String idPetugas = getIntent().getStringExtra("idPetugas");
-        String idLapangan = getIntent().getStringExtra("idLapangan");
-
-        dbRef.child("lapangan").child(idPetugas).child(idLapangan).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Lapangan dataLapangan = dataSnapshot.getValue(Lapangan.class);
-                assert dataLapangan != null;
-                hitungDurasi();
-                double hargaSewa = dataLapangan.getHargaSewa();
-                double total;
-
-                total = durasi * hargaSewa;
-                totalPembayaran = total;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return totalPembayaran;
-    }
-
-    private void hitungDurasi() {
-        int jamMulai = (int) spinnerMulai.getSelectedItem();
-        int jamSelesai = (int) spinnerSelesai.getSelectedItem();
-        int hasil = jamSelesai - jamMulai;
-        durasi = hasil;
     }
 
     private boolean cekTanggal() {
@@ -350,6 +314,8 @@ public class BuatPesananActivity extends AppCompatActivity {
     private void getDataPesanan() {
         String idPetugas = getIntent().getStringExtra("idPetugas");
         String idLapangan = getIntent().getStringExtra("idLapangan");
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
         dbRef.child("pemesan").child(idPemesan).addValueEventListener(new ValueEventListener() {
             @Override

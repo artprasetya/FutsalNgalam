@@ -1,54 +1,56 @@
 package com.example.asus.futsalngalam.MenuPesanan;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.asus.futsalngalam.Model.Pembayaran;
+import com.example.asus.futsalngalam.Model.Pesanan;
 import com.example.asus.futsalngalam.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
 
 public class UnggahBuktiActivity extends AppCompatActivity {
-
-    //object idPetugas
-    String idPetugas;
-
-    // Root Database Name for Firebase Database.
-    String Database_Path = "tempatFutsal";
-
-    // Creating button.
     Button pilihGambar, btnUnggah;
-
-    // Creating EditText.
     EditText namaRekening, nomorRekening;
-
-    // Creating ImageView.
-    ImageView SelectImage;
-
     // Creating URI.
     Uri FilePathUri;
-
-    // Creating StorageReference and DatabaseReference object.
     StorageReference storageReference;
     DatabaseReference databaseReference;
-
     // Image request code for onActivityResult() .
     int Image_Request_Code = 7;
-
     ProgressDialog progressDialog;
-
-
     private Toolbar toolbar;
     private RadioGroup radioPembayaran;
     private RadioButton rbLunas, rbUangMuka;
+    private TextView nominal;
+    String jenisPembayaran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,31 +62,187 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         namaRekening = findViewById(R.id.etNamaRekening);
         nomorRekening = findViewById(R.id.etNomorRekening);
         radioPembayaran = findViewById(R.id.rgPembayaran);
+        rbLunas = findViewById(R.id.rbLunas);
+        rbUangMuka = findViewById(R.id.rbUangMuka);
+        nominal = findViewById(R.id.tvNominal);
         pilihGambar = findViewById(R.id.pilihGambar);
         btnUnggah = findViewById(R.id.unggah);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        // Assigning Id to ProgressDialog.
+        progressDialog = new ProgressDialog(UnggahBuktiActivity.this);
+
+        pilihGambar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+
+                // Setting intent type as image to select image from phone storage.
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Pilih Gambar"), Image_Request_Code);
+            }
+        });
+
+        btnUnggah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Calling method to upload selected image on Firebase storage.
+                UnggahBuktiPembayaran();
+            }
+        });
+
+        radioPembayaran.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rbLunas.isChecked()) {
+                    hitungLunas();
+                } else if (rbUangMuka.isChecked()) {
+                    hitungUangMuka();
+                }
+            }
+        });
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+    private void UnggahBuktiPembayaran() {
+        final String idPesanan = getIntent().getStringExtra("idPesanan");
+        final String banktempatFutsal = getIntent().getStringExtra("namaBank");
+        final String namaRekBankTempatFutsal = getIntent().getStringExtra("namaRekening");
+        final String namaRekPemesan = namaRekening.getText().toString().trim();
+        final String nomorRekPemesan = nomorRekening.getText().toString().trim();
+        final String nominalTransfer = nominal.getText().toString().trim();
 
+        // Checking whether FilePathUri Is empty or not.
+        if (FilePathUri != null) {
+            // Setting progressDialog Title.
+            progressDialog.setTitle("Image is Uploading...");
+            // Showing progressDialog.
+            progressDialog.show();
+            // Creating second StorageReference.
+            StorageReference storageReference2nd = storageReference.child("albums/" + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+            // Adding addOnSuccessListener to second StorageReference.
+            storageReference2nd.putFile(FilePathUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Hiding the progressDialog after done uploading.
+                            progressDialog.dismiss();
+                            // Showing toast message after done uploading.
+                            Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
+                            @SuppressWarnings("VisibleForTests")
+                            Pembayaran data = new Pembayaran(idPesanan,
+                                    banktempatFutsal,
+                                    namaRekBankTempatFutsal,
+                                    namaRekPemesan,
+                                    nomorRekPemesan,
+                                    jenisPembayaran,
+                                    nominalTransfer,
+                                    taskSnapshot.getDownloadUrl().toString());
+
+                            // Adding image upload id s child element into databaseReference.
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").setValue(data);
+
+                            UbahStatusPesanan();
+                        }
+                    })
+                    // If something goes wrong .
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Hiding the progressDialog.
+                            progressDialog.dismiss();
+                            // Showing exception erro message.
+                            Toast.makeText(UnggahBuktiActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    // On progress change upload time.
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Setting progressDialog Title.
+                            progressDialog.setTitle("Sedang mengunggah...");
+                        }
+                    });
+        } else {
+            Toast.makeText(UnggahBuktiActivity.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void UbahStatusPesanan() {
+        String idPesanan = getIntent().getStringExtra("idPesanan");
+        databaseReference.child("pesanan").child(idPesanan).child("statusPesanan").setValue("Menunggu Konfirmasi");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            FilePathUri = data.getData();
+            try {
+                // Getting selected image into Bitmap.
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
+                // After selecting image change choose button above text.
+                pilihGambar.setText("Image Selected");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Creating Method to get the selected image file Extension from File Path URI.
+    public String GetFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        // Returning the file Extension.
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     private void hitungLunas() {
+        final String idPesanan = getIntent().getStringExtra("idPesanan");
+        databaseReference.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Pesanan dataPesanan = dataSnapshot.getValue(Pesanan.class);
+                if (dataPesanan != null) {
+                    double total = dataPesanan.getTotalPembayaran();
+                    nominal.setText("Rp. " + String.valueOf(total));
+                    jenisPembayaran = String.valueOf(rbLunas.getText());
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void hitungUangMuka() {
-        String idPetugas = getIntent().getStringExtra("idPetugas");
-        String idPesanan = getIntent().getStringExtra("idPesanan");
-        String namaBank = getIntent().getStringExtra("namaBank");
-        String nomorRekening = getIntent().getStringExtra("nomorRekening");
-        String namaRekening = getIntent().getStringExtra("namaRekening");
+        final String idPesanan = getIntent().getStringExtra("idPesanan");
+        databaseReference.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Pesanan dataPesanan = dataSnapshot.getValue(Pesanan.class);
+                if (dataPesanan != null) {
+                    double total = (dataPesanan.getTotalPembayaran() / 2);
+                    nominal.setText("Rp. " + String.valueOf(total));
+                    jenisPembayaran = String.valueOf(rbUangMuka.getText());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Beri Ulasan");
+        getSupportActionBar().setTitle("Unggah Bukti Pembayaran");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

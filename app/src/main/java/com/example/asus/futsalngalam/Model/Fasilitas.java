@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Fasilitas implements Serializable {
 
-    String idFasilitas,idPetugas, fasilitas;
+    String idFasilitas, idPetugas, fasilitas;
 
     public Fasilitas() {
     }
