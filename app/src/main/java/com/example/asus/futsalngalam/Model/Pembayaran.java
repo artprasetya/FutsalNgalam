@@ -1,20 +1,57 @@
 package com.example.asus.futsalngalam.Model;
 
 public class Pembayaran {
-    String idPesanan, bankTempatFutsal, namaRekBankTempatFutsal, namaRekPemesan, nomorRekPemesan, jenisPembayaran, nominalTransfer, buktiPembayaran;
+    String idPesanan, idRekening, namaBank, nomorRekening, namaRekening, namaRekPemesan, nomorRekPemesan, jenisPembayaran, nominalTransfer, buktiPembayaran;
 
     public Pembayaran() {
     }
 
-    public Pembayaran(String idPesanan, String bankTempatFutsal, String namaRekBankTempatFutsal, String namaRekPemesan, String nomorRekPemesan, String jenisPembayaran, String nominalTransfer, String buktiPembayaran) {
+    public Pembayaran(String idPesanan, String namaRekPemesan, String nomorRekPemesan, String jenisPembayaran, String nominalTransfer, String buktiPembayaran) {
         this.idPesanan = idPesanan;
-        this.bankTempatFutsal = bankTempatFutsal;
-        this.namaRekBankTempatFutsal = namaRekBankTempatFutsal;
         this.namaRekPemesan = namaRekPemesan;
         this.nomorRekPemesan = nomorRekPemesan;
         this.jenisPembayaran = jenisPembayaran;
         this.nominalTransfer = nominalTransfer;
         this.buktiPembayaran = buktiPembayaran;
+    }
+
+    public Pembayaran(String idRekening, String namaBank, String nomorRekening, String namaRekening) {
+        this.idRekening = idRekening;
+        this.namaBank = namaBank;
+        this.nomorRekening = nomorRekening;
+        this.namaRekening = namaRekening;
+    }
+
+    public String getIdRekening() {
+        return idRekening;
+    }
+
+    public void setIdRekening(String idRekening) {
+        this.idRekening = idRekening;
+    }
+
+    public String getNamaBank() {
+        return namaBank;
+    }
+
+    public void setNamaBank(String namaBank) {
+        this.namaBank = namaBank;
+    }
+
+    public String getNomorRekening() {
+        return nomorRekening;
+    }
+
+    public void setNomorRekening(String nomorRekening) {
+        this.nomorRekening = nomorRekening;
+    }
+
+    public String getNamaRekening() {
+        return namaRekening;
+    }
+
+    public void setNamaRekening(String namaRekening) {
+        this.namaRekening = namaRekening;
     }
 
     public String getIdPesanan() {
@@ -23,22 +60,6 @@ public class Pembayaran {
 
     public void setIdPesanan(String idPesanan) {
         this.idPesanan = idPesanan;
-    }
-
-    public String getBankTempatFutsal() {
-        return bankTempatFutsal;
-    }
-
-    public void setBankTempatFutsal(String bankTempatFutsal) {
-        this.bankTempatFutsal = bankTempatFutsal;
-    }
-
-    public String getNamaRekBankTempatFutsal() {
-        return namaRekBankTempatFutsal;
-    }
-
-    public void setNamaRekBankTempatFutsal(String namaRekBankTempatFutsal) {
-        this.namaRekBankTempatFutsal = namaRekBankTempatFutsal;
     }
 
     public String getNamaRekPemesan() {

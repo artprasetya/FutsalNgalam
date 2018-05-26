@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.futsalngalam.Model.Pembayaran;
 import com.example.asus.futsalngalam.Model.Pesanan;
 import com.example.asus.futsalngalam.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -108,8 +107,6 @@ public class UnggahBuktiActivity extends AppCompatActivity {
 
     private void UnggahBuktiPembayaran() {
         final String idPesanan = getIntent().getStringExtra("idPesanan");
-        final String banktempatFutsal = getIntent().getStringExtra("namaBank");
-        final String namaRekBankTempatFutsal = getIntent().getStringExtra("namaRekening");
         final String namaRekPemesan = namaRekening.getText().toString().trim();
         final String nomorRekPemesan = nomorRekening.getText().toString().trim();
         final String nominalTransfer = nominal.getText().toString().trim();
@@ -131,18 +128,13 @@ public class UnggahBuktiActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             // Showing toast message after done uploading.
                             Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
-                            @SuppressWarnings("VisibleForTests")
-                            Pembayaran data = new Pembayaran(idPesanan,
-                                    banktempatFutsal,
-                                    namaRekBankTempatFutsal,
-                                    namaRekPemesan,
-                                    nomorRekPemesan,
-                                    jenisPembayaran,
-                                    nominalTransfer,
-                                    taskSnapshot.getDownloadUrl().toString());
 
-                            // Adding image upload id s child element into databaseReference.
-                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").setValue(data);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("namaRekPemesan").setValue(namaRekPemesan);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("idPesanan").setValue(idPesanan);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nomorRekPemesan").setValue(nomorRekPemesan);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("jenisPembayaran").setValue(jenisPembayaran);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nominalTransfer").setValue(nominalTransfer);
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("buktiPembayaran").setValue(taskSnapshot.getDownloadUrl().toString());
 
                             UbahStatusPesanan();
                         }
@@ -166,7 +158,7 @@ public class UnggahBuktiActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(UnggahBuktiActivity.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
+            Toast.makeText(UnggahBuktiActivity.this, "Lengkapi semua data", Toast.LENGTH_LONG).show();
         }
     }
 

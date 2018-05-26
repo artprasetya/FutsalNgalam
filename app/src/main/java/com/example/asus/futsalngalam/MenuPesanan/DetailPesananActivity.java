@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.asus.futsalngalam.Model.Pembayaran;
 import com.example.asus.futsalngalam.Model.Pesanan;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.database.DataSnapshot;
@@ -19,20 +20,13 @@ import com.google.firebase.database.ValueEventListener;
 public class DetailPesananActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TextView invoice;
-    private TextView statusPesanan;
-    private TextView namaPemesan;
-    private TextView nomorTelepon;
-    private TextView namaTempatFutsal;
-    private TextView namaLapangan;
-    private TextView tanggalPesan;
-    private TextView durasiSewa;
-    private TextView totalPembayaran;
-    private TextView tvNamaBank;
-    private TextView tvNomorRekening;
-    private TextView tvNamaRekening;
-    private Button btnUnggah;
-    private Button btnUlasan;
+    private TextView invoice, statusPesanan,
+            namaPemesan, nomorTelepon,
+            namaTempatFutsal, namaLapangan,
+            tanggalPesan, durasiSewa,
+            totalPembayaran, tvNamaBank,
+            tvNomorRekening, tvNamaRekening;
+    private Button btnUnggah, btnUlasan;
     private DatabaseReference dbRef;
 
     @Override
@@ -43,19 +37,19 @@ public class DetailPesananActivity extends AppCompatActivity {
         setToolbar();
 
         invoice = findViewById(R.id.tvInvoice);
-        statusPesanan = (TextView) findViewById(R.id.tvStatus);
-        namaPemesan = (TextView) findViewById(R.id.tvNamaPemesan);
-        nomorTelepon = (TextView) findViewById(R.id.tvNomorPemesan);
-        namaTempatFutsal = (TextView) findViewById(R.id.tvNamaTempatFutsal);
-        namaLapangan = (TextView) findViewById(R.id.tvNamaLapangan);
-        tanggalPesan = (TextView) findViewById(R.id.tvTanggalPesan);
-        durasiSewa = (TextView) findViewById(R.id.tvDurasi);
-        totalPembayaran = (TextView) findViewById(R.id.tvTotal);
-        tvNamaBank = (TextView) findViewById(R.id.tvNamaBank);
-        tvNomorRekening = (TextView) findViewById(R.id.tvNomorRekening);
-        tvNamaRekening = (TextView) findViewById(R.id.tvNamaRekening);
-        btnUnggah = (Button) findViewById(R.id.btnUnggahBukti);
-        btnUlasan = (Button) findViewById(R.id.btnBeriUlasan);
+        statusPesanan = findViewById(R.id.tvStatus);
+        namaPemesan = findViewById(R.id.tvNamaPemesan);
+        nomorTelepon = findViewById(R.id.tvNomorPemesan);
+        namaTempatFutsal = findViewById(R.id.tvNamaTempatFutsal);
+        namaLapangan = findViewById(R.id.tvNamaLapangan);
+        tanggalPesan = findViewById(R.id.tvTanggalPesan);
+        durasiSewa = findViewById(R.id.tvDurasi);
+        totalPembayaran = findViewById(R.id.tvTotal);
+        tvNamaBank = findViewById(R.id.tvNamaBank);
+        tvNomorRekening = findViewById(R.id.tvNomorRekening);
+        tvNamaRekening = findViewById(R.id.tvNamaRekening);
+        btnUnggah = findViewById(R.id.btnUnggahBukti);
+        btnUlasan = findViewById(R.id.btnBeriUlasan);
 
         getDataPesanan();
 
@@ -65,7 +59,6 @@ public class DetailPesananActivity extends AppCompatActivity {
                 gotoUnggah();
             }
         });
-
         btnUlasan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,12 +69,6 @@ public class DetailPesananActivity extends AppCompatActivity {
 
     private void getDataPesanan() {
         String idPesanan = getIntent().getStringExtra("idPesanan");
-        String namaBank = getIntent().getStringExtra("namaBank");
-        String nomorRekening = getIntent().getStringExtra("nomorRekening");
-        String namaRekening = getIntent().getStringExtra("namaRekening");
-        tvNamaBank.setText(namaBank);
-        tvNomorRekening.setText(nomorRekening);
-        tvNamaRekening.setText(namaRekening);
 
         dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
@@ -106,14 +93,28 @@ public class DetailPesananActivity extends AppCompatActivity {
 
             }
         });
+
+        dbRef.child("pesanan").child(idPesanan).child("pembayaran").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Pembayaran dataPembayaran = dataSnapshot.getValue(Pembayaran.class);
+                if (dataPembayaran != null) {
+                    tvNamaBank.setText(dataPembayaran.getNamaBank());
+                    tvNomorRekening.setText(dataPembayaran.getNomorRekening());
+                    tvNamaRekening.setText(dataPembayaran.getNamaRekening());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void gotoUlasan() {
         String idPetugas = getIntent().getStringExtra("idPetugas");
         String idPesanan = getIntent().getStringExtra("idPesanan");
-        String namaBank = getIntent().getStringExtra("namaBank");
-        String nomorRekening = getIntent().getStringExtra("nomorRekening");
-        String namaRekening = getIntent().getStringExtra("namaRekening");
         String tempatFutsal = namaTempatFutsal.getText().toString();
         String pemesan = namaPemesan.getText().toString();
         String telepon = nomorTelepon.getText().toString();
@@ -124,27 +125,18 @@ public class DetailPesananActivity extends AppCompatActivity {
         intent.putExtra("namaTempatFutsal", tempatFutsal);
         intent.putExtra("namaPemesan", pemesan);
         intent.putExtra("nomorTelepon", telepon);
-        intent.putExtra("namaBank", namaBank);
-        intent.putExtra("nomorRekening", nomorRekening);
-        intent.putExtra("namaRekening", namaRekening);
         startActivity(intent);
     }
 
     private void gotoUnggah() {
         String idPetugas = getIntent().getStringExtra("idPetugas");
         String idPesanan = getIntent().getStringExtra("idPesanan");
-        String namaBank = getIntent().getStringExtra("namaBank");
-        String nomorRekening = getIntent().getStringExtra("nomorRekening");
-        String namaRekening = getIntent().getStringExtra("namaRekening");
         String pemesan = namaPemesan.getText().toString();
 
         Intent intent = new Intent(DetailPesananActivity.this, UnggahBuktiActivity.class);
         intent.putExtra("idPetugas", idPetugas);
         intent.putExtra("idPesanan", idPesanan);
         intent.putExtra("namaPemesan", pemesan);
-        intent.putExtra("namaBank", namaBank);
-        intent.putExtra("nomorRekening", nomorRekening);
-        intent.putExtra("namaRekening", namaRekening);
         startActivity(intent);
     }
 

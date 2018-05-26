@@ -49,9 +49,10 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Pesanan dataPesanan = listPesanan.get(position);
         final String idPesanan = dataPesanan.getIdPesanan();
+        final String idLapangan = dataPesanan.getIdLapangan();
+        final String idPetugas = dataPesanan.getIdPetugas();
         final String status = dataPesanan.getStatusPesanan();
         final String invoice = dataPesanan.getInvoice();
-
 
         holder.status.setText(status);
         holder.invoice.setText(invoice);
@@ -61,6 +62,8 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailPesananActivity.class);
                 intent.putExtra("idPesanan", idPesanan);
+                intent.putExtra("idLapangan", idLapangan);
+                intent.putExtra("idPetugas", idPetugas);
                 context.startActivity(intent);
             }
         });
@@ -70,6 +73,8 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailPesananActivity.class);
                 intent.putExtra("idPesanan", idPesanan);
+                intent.putExtra("idLapangan", idLapangan);
+                intent.putExtra("idPetugas", idPetugas);
                 context.startActivity(intent);
             }
         });

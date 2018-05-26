@@ -1,6 +1,5 @@
 package com.example.asus.futsalngalam.MenuPesanan;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -76,16 +75,6 @@ public class BeriUlasanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 simpanUlasan();
-                String idPesanan = getIntent().getStringExtra("idPesanan");
-                String namaBank = getIntent().getStringExtra("namaBank");
-                String nomorRekening = getIntent().getStringExtra("nomorRekening");
-                String namaRekening = getIntent().getStringExtra("namaRekening");
-                Intent intent = new Intent(BeriUlasanActivity.this, DetailPesananActivity.class);
-                intent.putExtra("idPesanan", idPesanan);
-                intent.putExtra("namaBank", namaBank);
-                intent.putExtra("nomorRekening", nomorRekening);
-                intent.putExtra("namaRekening", namaRekening);
-                startActivity(intent);
             }
         });
 
@@ -101,17 +90,18 @@ public class BeriUlasanActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(ulasan)) {
             Toast.makeText(this, "Silahkan beri ulasan anda", Toast.LENGTH_LONG).show();
+        } else {
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPetugas").setValue(idPetugas);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idUlasan").setValue(idUlasan);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPesanan").setValue(idPesanan);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPemesan").setValue(idPemesan);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("namaPemesan").setValue(pemesan);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("nomorTelepon").setValue(telepon);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("rating").setValue(rating);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("ulasan").setValue(ulasan);
+            dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("timestamp").setValue(Date);
+            Toast.makeText(this, "Ulasan berhasil disimpan", Toast.LENGTH_LONG).show();
         }
-
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPetugas").setValue(idPetugas);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idUlasan").setValue(idUlasan);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPesanan").setValue(idPesanan);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("idPemesan").setValue(idPemesan);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("namaPemesan").setValue(pemesan);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("nomorTelepon").setValue(telepon);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("rating").setValue(rating);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("ulasan").setValue(ulasan);
-        dbRef.child("ulasan").child(idPetugas).child(idUlasan).child("timestamp").setValue(Date);
     }
 
     private void getDataPemesan() {

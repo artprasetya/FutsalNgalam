@@ -75,19 +75,15 @@ public class RekeningAdapter extends RecyclerView.Adapter<RekeningAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(idRekening);
-                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(namaBank);
-                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(nomorRekening);
-                dbRef.child("pesanan").child(idPesanan).child("pembayaran").setValue(namaRekening);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").child("idRekening").setValue(idRekening);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").child("namaBank").setValue(namaBank);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").child("nomorRekening").setValue(nomorRekening);
+                dbRef.child("pesanan").child(idPesanan).child("pembayaran").child("namaRekening").setValue(namaRekening);
 
                 Intent intent = new Intent(context, DetailPesananActivity.class);
                 intent.putExtra("idPesanan", idPesanan);
                 intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("idPetugas", idPetugas);
-                intent.putExtra("idRekening", idRekening);
-                intent.putExtra("namaRekening", namaRekening);
-                intent.putExtra("namaBank", namaBank);
-                intent.putExtra("nomorRekening", nomorRekening);
                 context.startActivity(intent);
             }
         });
