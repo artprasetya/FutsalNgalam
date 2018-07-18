@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 public class UnggahBuktiActivity extends AppCompatActivity {
     Button pilihGambar, btnUnggah;
@@ -134,9 +139,10 @@ public class UnggahBuktiActivity extends AppCompatActivity {
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nomorRekPemesan").setValue(nomorRekPemesan);
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("jenisPembayaran").setValue(jenisPembayaran);
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nominalTransfer").setValue(nominalTransfer);
-                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("buktiPembayaran").setValue(taskSnapshot.getDownloadUrl().toString());
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("buktiPembayaran").setValue(storageReference.getDownloadUrl().toString());
 
-                            UbahStatusPesanan();
+                            ubahStatusPesanan();
+                            buatPemberitahuan();
                         }
                     })
                     // If something goes wrong .
@@ -162,11 +168,6 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         }
     }
 
-    private void UbahStatusPesanan() {
-        String idPesanan = getIntent().getStringExtra("idPesanan");
-        databaseReference.child("pesanan").child(idPesanan).child("statusPesanan").setValue("Menunggu Konfirmasi");
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,6 +190,68 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         // Returning the file Extension.
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void ubahStatusPesanan() {
+        String idPesanan = getIntent().getStringExtra("idPesanan");
+        databaseReference.child("pesanan").child(idPesanan).child("statusPesanan").setValue("Menunggu Konfirmasi");
+    }
+
+    private void buatPemberitahuan() {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        String emailTempatFutsal = getIntent().getStringExtra("email");
+
+        try {
+            String jsonResponse;
+
+            URL url = new URL("https://onesignal.com/api/v1/notifications");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setUseCaches(false);
+            con.setDoOutput(true);
+            con.setDoInput(true);
+
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            con.setRequestProperty("Authorization", "Basic ZTM1ZDViNjMtMzAxMS00YTZiLWJmYjUtNjQ0NjZmN2IyYzUz");
+            con.setRequestMethod("POST");
+
+            String strJsonBody = "{"
+                    + "\"app_id\": \"65dbf75c-f04c-4559-875d-d6a0da59ea30\","
+                    + "\"included_segments\": [\"All\"],"
+                    + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + emailTempatFutsal + "\"}],"
+                    //+   "\"data\": {\"foo\": \"bar\"},"
+                    + "\"contents\": {\"en\": \"Pemesan Telah Melakukan Pembayaran\"}"
+                    + "}";
+
+
+            System.out.println("strJsonBody:\n" + strJsonBody);
+
+            byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+            con.setFixedLengthStreamingMode(sendBytes.length);
+
+            OutputStream outputStream = con.getOutputStream();
+            outputStream.write(sendBytes);
+
+            int httpResponse = con.getResponseCode();
+            System.out.println("httpResponse: " + httpResponse);
+
+            if (httpResponse >= HttpURLConnection.HTTP_OK
+                    && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                scanner.close();
+            } else {
+                Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                scanner.close();
+            }
+            System.out.println("jsonResponse:\n" + jsonResponse);
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     private void hitungLunas() {

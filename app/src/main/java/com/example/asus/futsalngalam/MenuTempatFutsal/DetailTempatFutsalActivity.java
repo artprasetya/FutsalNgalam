@@ -122,6 +122,7 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
 
     private void getDataLapangan() {
         String idPetugas = getIntent().getStringExtra("idPetugas");
+        final String emailTempatFutsal = getIntent().getStringExtra("email");
         dbRef = FirebaseDatabase.getInstance().getReference("lapangan");
         // Adding Add Value Event Listener to databaseReference.
         dbRef.child(idPetugas).addValueEventListener(new ValueEventListener() {
@@ -135,7 +136,7 @@ public class DetailTempatFutsalActivity extends AppCompatActivity {
                     lapanganList.add(lapangan);
                 }
 
-                adapter = new LapanganAdapter(context, lapanganList);
+                adapter = new LapanganAdapter(context, lapanganList, emailTempatFutsal);
 
                 recyclerViewLapangan.setAdapter(adapter);
             }

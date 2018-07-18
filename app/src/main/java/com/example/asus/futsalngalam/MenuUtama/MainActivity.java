@@ -1,5 +1,7 @@
 package com.example.asus.futsalngalam.MenuUtama;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.example.asus.futsalngalam.MenuProfil.ProfilActivity;
 import com.example.asus.futsalngalam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private String idPemesan;
 
+    static String login_email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         idPemesan = user.getUid();
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        login_email = user.getEmail();
+        OneSignal.sendTag("User_ID", login_email);
 
         CustomGridViewActivity adapterViewAndroid = new CustomGridViewActivity(MainActivity.this, gridViewString, gridViewImageId);
         androidGridView = (GridView) findViewById(R.id.grid_view);
@@ -65,11 +78,31 @@ public class MainActivity extends AppCompatActivity {
                         view.getContext().startActivity(c);
                         break;
                     case 3:
-                        signOut();
+                        showDialog();
                         break;
                 }
             }
         });
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Konfirmasi Keluar")
+                .setCancelable(true)
+                .setMessage("Anda Yakin Ingin Keluar?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        signOut();
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alert.show();
     }
 
     public void signOut() {

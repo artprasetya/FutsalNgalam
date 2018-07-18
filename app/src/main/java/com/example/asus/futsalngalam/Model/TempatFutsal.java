@@ -8,20 +8,21 @@ import java.io.Serializable;
 
 public class TempatFutsal implements Serializable {
 
-    private String idPetugas, namaTempatFutsal, alamat, deskripsi, fotoProfil, noTelepon;
+    private String idPetugas, namaTempatFutsal, alamat, deskripsi, fotoProfil, noTelepon, email;
     public double latitude;
     public double longitude;
 
     public TempatFutsal() {
     }
 
-    public TempatFutsal(String idPetugas, String namaTempatFutsal, String alamat, String deskripsi, String noTelepon, String fotoProfil, double latitude, double longitude) {
+    public TempatFutsal(String idPetugas, String namaTempatFutsal, String alamat, String deskripsi, String fotoProfil, String noTelepon, String email, double latitude, double longitude) {
         this.idPetugas = idPetugas;
         this.namaTempatFutsal = namaTempatFutsal;
         this.alamat = alamat;
         this.deskripsi = deskripsi;
-        this.noTelepon = noTelepon;
         this.fotoProfil = fotoProfil;
+        this.noTelepon = noTelepon;
+        this.email = email;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -88,5 +89,13 @@ public class TempatFutsal implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

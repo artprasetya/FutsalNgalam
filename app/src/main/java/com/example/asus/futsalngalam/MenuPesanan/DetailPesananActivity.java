@@ -2,6 +2,7 @@ package com.example.asus.futsalngalam.MenuPesanan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -25,9 +26,17 @@ public class DetailPesananActivity extends AppCompatActivity {
             namaTempatFutsal, namaLapangan,
             tanggalPesan, durasiSewa,
             totalPembayaran, tvNamaBank,
-            tvNomorRekening, tvNamaRekening;
+            tvNomorRekening, tvNamaRekening,
+            countdownTimerText;
     private Button btnUnggah, btnUlasan;
     private DatabaseReference dbRef;
+
+    private static final long START_TIME_IN_MILLIS = 1800000;
+    private static CountDownTimer countDownTimer;
+
+    private boolean mTimerRunning;
+
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +59,10 @@ public class DetailPesananActivity extends AppCompatActivity {
         tvNamaRekening = findViewById(R.id.tvNamaRekening);
         btnUnggah = findViewById(R.id.btnUnggahBukti);
         btnUlasan = findViewById(R.id.btnBeriUlasan);
+        countdownTimerText = findViewById(R.id.countdownText);
 
+//        startTimer();
+//        updateCounDownText();
         getDataPesanan();
 
         btnUnggah.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +78,71 @@ public class DetailPesananActivity extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//
+//        editor.putLong("millisLeft", mTimeLeftInMillis);
+//        editor.putBoolean("timerRunning", mTimerRunning);
+//        editor.putLong("endTime", mEndTime);
+//
+//        editor.apply();
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
+//
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putLong("millisLeft", mTimeLeftInMillis);
+//        outState.putBoolean("timerRunning", mTimerRunning);
+//        outState.putLong("endTime", mEndTime);
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        mTimeLeftInMillis = savedInstanceState.getLong("millisLeft");
+//        mTimerRunning = savedInstanceState.getBoolean("timerRunning");
+//        updateCounDownText();
+//
+//        if (mTimerRunning) {
+//            mEndTime = savedInstanceState.getLong("endTime");
+//            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+//            startTimer();
+//        }
+//    }
+
+//    private void startTimer() {
+//        countDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                mTimeLeftInMillis = millisUntilFinished;
+//                updateCounDownText();
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                mTimerRunning = false;
+//            }
+//        }.start();
+//        mTimerRunning = true;
+//    }
+//
+//    private void updateCounDownText() {
+//        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+//        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+//        String format = String.format(Locale.getDefault(),"%02d:%02d", minutes, seconds);
+//        countdownTimerText.setText(format);
+//    }
 
     private void getDataPesanan() {
         String idPesanan = getIntent().getStringExtra("idPesanan");

@@ -157,7 +157,7 @@ public class UbahProfilActivity extends AppCompatActivity implements View.OnClic
                             Toast.makeText(getApplicationContext(), "Berhasil Disimpan. ", Toast.LENGTH_LONG).show();
 
                             //simpan ke database
-                            dbRef.child(idPemesan).child("fotoProfil").setValue(taskSnapshot.getDownloadUrl().toString());
+                            dbRef.child(idPemesan).child("fotoProfil").setValue(storageRef.getDownloadUrl().toString());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

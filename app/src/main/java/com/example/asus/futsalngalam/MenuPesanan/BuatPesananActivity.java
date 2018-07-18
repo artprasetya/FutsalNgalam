@@ -3,7 +3,9 @@ package com.example.asus.futsalngalam.MenuPesanan;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -28,9 +30,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class BuatPesananActivity extends AppCompatActivity {
 
@@ -38,6 +44,7 @@ public class BuatPesananActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private String idPemesan;
     private String idPesanan;
+    private String emailPemesan;
     private String invoice;
     private TextView namaPemesan;
     private TextView nomorPemesan;
@@ -89,6 +96,7 @@ public class BuatPesananActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         idPemesan = user.getUid();
+        emailPemesan = user.getEmail();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -123,6 +131,7 @@ public class BuatPesananActivity extends AppCompatActivity {
                     String idLapangan = getIntent().getStringExtra("idLapangan");
 
                     buatPesanan();
+                    buatPemberitahuan();
 
                     Intent intent = new Intent(BuatPesananActivity.this, PilihRekeningActivity.class);
                     intent.putExtra("idPetugas", idPetugas);
@@ -133,6 +142,70 @@ public class BuatPesananActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(BuatPesananActivity.this, "Periksa Kembali Pesanan Anda",
                             Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void buatPemberitahuan() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    String emailTempatFutsal = getIntent().getStringExtra("email");
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic ZTM1ZDViNjMtMzAxMS00YTZiLWJmYjUtNjQ0NjZmN2IyYzUz");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"65dbf75c-f04c-4559-875d-d6a0da59ea30\","
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + emailTempatFutsal + "\"}],"
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"Pesanan Baru Masuk\"}"
+                                +"}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
                 }
             }
         });
@@ -180,6 +253,7 @@ public class BuatPesananActivity extends AppCompatActivity {
         dbRef.child("idLapangan").setValue(idLapangan);
         dbRef.child("statusPesanan").setValue(statusPesanan);
         dbRef.child("namaPemesan").setValue(pemesan);
+        dbRef.child("emailPemesan").setValue(emailPemesan);
         dbRef.child("noTelepon").setValue(noTelpon);
         dbRef.child("namaTempatFutsal").setValue(tempatFutsal);
         dbRef.child("namaLapangan").setValue(lapangan);

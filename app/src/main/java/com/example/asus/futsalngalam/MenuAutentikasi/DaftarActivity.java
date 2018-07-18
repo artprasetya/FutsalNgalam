@@ -1,7 +1,9 @@
 package com.example.asus.futsalngalam.MenuAutentikasi;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -70,7 +72,7 @@ public class DaftarActivity extends Activity {
                 }
 
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Password terlalu pendek, masukkan minimal 6 karakter!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -81,10 +83,11 @@ public class DaftarActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(DaftarActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            showDialog();
+                            mProgress.dismiss();
                         } else {
-                            Toast.makeText(DaftarActivity.this, "Sign Up Success.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DaftarActivity.this, LoginActivity.class));
+                            Toast.makeText(DaftarActivity.this, "Daftar Berhasil", Toast.LENGTH_SHORT).show();
                             mProgress.dismiss();
                             simpanData();
                             finish();
@@ -93,6 +96,20 @@ public class DaftarActivity extends Activity {
                 });
             }
         });
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Pemberitahuan")
+                .setCancelable(true)
+                .setMessage("Daftar Gagal")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alert.show();
     }
 
     private void simpanData() {

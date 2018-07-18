@@ -53,6 +53,7 @@ public class TempatFutsalAdapter extends RecyclerView.Adapter<TempatFutsalAdapte
         final String idPetugas = dataTempatFutsal.getIdPetugas();
         final String fotoTempatFutsal = dataTempatFutsal.getFotoProfil();
         final String namaTempatFutsal = dataTempatFutsal.getNamaTempatFutsal();
+        final String emailTempatFutsal = dataTempatFutsal.getEmail();
 
         Glide.with(context)
                 .load(fotoTempatFutsal)
@@ -64,6 +65,7 @@ public class TempatFutsalAdapter extends RecyclerView.Adapter<TempatFutsalAdapte
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailTempatFutsalActivity.class);
                 intent.putExtra("idPetugas", idPetugas);
+                intent.putExtra("email", emailTempatFutsal);
                 context.startActivity(intent);
             }
         });

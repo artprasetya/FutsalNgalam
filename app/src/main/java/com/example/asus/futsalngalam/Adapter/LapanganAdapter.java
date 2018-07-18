@@ -22,12 +22,18 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
     LayoutInflater mInflater;
     private List<Lapangan> lapanganList;
     private DatabaseReference dbRef;
+    String emailTempatFutsal;
 
     public LapanganAdapter(Context context, List<Lapangan> lapanganList) {
         this.context = context;
         this.lapanganList = lapanganList;
-
         mInflater = LayoutInflater.from(context);
+    }
+
+    public LapanganAdapter(Context context, List<Lapangan> lapanganList, String emailTempatFutsal) {
+        this.context = context;
+        this.lapanganList = lapanganList;
+        this.emailTempatFutsal = emailTempatFutsal;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,6 +78,7 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
                 intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("namaLapangan", namaLapangan);
                 intent.putExtra("hargaSewa", hargaSewa);
+                intent.putExtra("email", emailTempatFutsal);
                 context.startActivity(intent);
             }
         });
@@ -84,6 +91,7 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
                 intent.putExtra("idLapangan", idLapangan);
                 intent.putExtra("namaLapangan", namaLapangan);
                 intent.putExtra("hargaSewa", hargaSewa);
+                intent.putExtra("email", emailTempatFutsal);
                 context.startActivity(intent);
             }
         });

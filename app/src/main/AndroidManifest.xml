@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".MenuPesanan.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/fnlogo"
         android:label="@string/app_name"
@@ -53,7 +54,7 @@
         <activity android:name=".MenuPesanan.DaftarPesananActivity" />
         <activity android:name=".MenuPesanan.BeriUlasanActivity" />
         <activity android:name=".MenuTempatFutsal.LihatUlasanActivity" />
-        <activity android:name=".MenuPesanan.UnggahBuktiActivity"></activity>
+        <activity android:name=".MenuPesanan.UnggahBuktiActivity" />
     </application>
 
 </manifest>
