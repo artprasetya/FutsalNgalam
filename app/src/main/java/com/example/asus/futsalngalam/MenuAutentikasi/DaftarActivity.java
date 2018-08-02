@@ -59,7 +59,6 @@ public class DaftarActivity extends Activity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mProgress.setMessage("Mendaftar ...");
                 email = inputEmail.getText().toString().trim();
                 password = inputPassword.getText().toString().trim();
@@ -87,9 +86,9 @@ public class DaftarActivity extends Activity {
                             mProgress.dismiss();
                         } else {
                             startActivity(new Intent(DaftarActivity.this, LoginActivity.class));
+                            simpanData();
                             Toast.makeText(DaftarActivity.this, "Daftar Berhasil", Toast.LENGTH_SHORT).show();
                             mProgress.dismiss();
-                            simpanData();
                             finish();
                         }
                     }

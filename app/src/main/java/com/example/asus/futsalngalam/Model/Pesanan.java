@@ -15,14 +15,16 @@ public class Pesanan {
             jamMulai,
             jamSelesai,
             invoice,
-            timestamp;
+            timestamp,
+            emailTempatFutsal;
 
     double totalPembayaran;
 
     public Pesanan() {
     }
 
-    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String jamMulai, String jamSelesai, String invoice, String timestamp, double totalPembayaran) {
+    public Pesanan(String idPetugas, String idPesanan, String idPemesan, String idLapangan, String statusPesanan, String namaPemesan, String noTelepon, String namaTempatFutsal, String namaLapangan, String tanggalPesan, String jamMulai, String jamSelesai, String invoice, String timestamp, String emailTempatFutsal, double totalPembayaran) {
+
         this.idPetugas = idPetugas;
         this.idPesanan = idPesanan;
         this.idPemesan = idPemesan;
@@ -37,7 +39,16 @@ public class Pesanan {
         this.jamSelesai = jamSelesai;
         this.invoice = invoice;
         this.timestamp = timestamp;
+        this.emailTempatFutsal = emailTempatFutsal;
         this.totalPembayaran = totalPembayaran;
+    }
+
+    public String getEmailTempatFutsal() {
+        return emailTempatFutsal;
+    }
+
+    public void setEmailTempatFutsal(String emailTempatFutsal) {
+        this.emailTempatFutsal = emailTempatFutsal;
     }
 
     public String getInvoice() {

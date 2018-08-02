@@ -2,7 +2,6 @@ package com.example.asus.futsalngalam.MenuPesanan;
 
 import android.app.Application;
 import android.content.Intent;
-import android.util.Log;
 
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
@@ -72,7 +71,7 @@ public class ApplicationClass extends Application {
 //            intent.putExtra(Constants.AVATAR, avatar);
 //            intent.putExtra(Constants.TITLE, titleTransaksi);
 //            intent.putExtra(Constants.TRANSAKSI, jenisTransaksi);
-            Log.d("nilai activity", "= " + activityToLaunch);
+//            Log.d("nilai activity", "= " + activityToLaunch);
             // startActivity(intent);
             startActivity(intent);
 

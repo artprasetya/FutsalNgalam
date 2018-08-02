@@ -22,24 +22,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuAutentikasi.LoginActivity">
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MenuAutentikasi.LoginActivity" />
         <activity android:name=".MenuAutentikasi.DaftarActivity" />
         <activity
             android:name=".MenuUtama.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
         <activity android:name=".MenuAutentikasi.ResetPasswordActivity" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity android:name=".MenuProfil.ProfilActivity" />
         <activity android:name=".MenuProfil.UbahProfilActivity" />
         <activity android:name=".MenuTempatFutsal.DetailTempatFutsalActivity" />
@@ -55,6 +53,10 @@
         <activity android:name=".MenuPesanan.BeriUlasanActivity" />
         <activity android:name=".MenuTempatFutsal.LihatUlasanActivity" />
         <activity android:name=".MenuPesanan.UnggahBuktiActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

@@ -78,7 +78,7 @@
             android:layout_weight="1"
             android:text="Daftar disini"
             android:textColor="@color/colorWhite"
-            android:textSize="13dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/btn_reset"
@@ -86,6 +86,6 @@
             android:layout_height="wrap_content"
             android:text="Lupa Password"
             android:textColor="@color/colorWhite"
-            android:textSize="13dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </RelativeLayout>

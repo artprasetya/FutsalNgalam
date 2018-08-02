@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -55,6 +56,7 @@ public class UnggahBuktiActivity extends AppCompatActivity {
     private RadioButton rbLunas, rbUangMuka;
     private TextView nominal;
     String jenisPembayaran;
+    String emailTempatFutsal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,7 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         final String nomorRekPemesan = nomorRekening.getText().toString().trim();
         final String nominalTransfer = nominal.getText().toString().trim();
 
+
         // Checking whether FilePathUri Is empty or not.
         if (FilePathUri != null) {
             // Setting progressDialog Title.
@@ -123,12 +126,13 @@ public class UnggahBuktiActivity extends AppCompatActivity {
             // Showing progressDialog.
             progressDialog.show();
             // Creating second StorageReference.
-            StorageReference storageReference2nd = storageReference.child("albums/" + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+            final StorageReference storageReference2nd = storageReference.child("albums/" + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
             // Adding addOnSuccessListener to second StorageReference.
             storageReference2nd.putFile(FilePathUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                             // Hiding the progressDialog after done uploading.
                             progressDialog.dismiss();
                             // Showing toast message after done uploading.
@@ -139,10 +143,9 @@ public class UnggahBuktiActivity extends AppCompatActivity {
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nomorRekPemesan").setValue(nomorRekPemesan);
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("jenisPembayaran").setValue(jenisPembayaran);
                             databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("nominalTransfer").setValue(nominalTransfer);
-                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("buktiPembayaran").setValue(storageReference.getDownloadUrl().toString());
-
-                            ubahStatusPesanan();
+                            databaseReference.child("pesanan").child(idPesanan).child("pembayaran").child("buktiPembayaran").setValue(taskSnapshot.toString());
                             buatPemberitahuan();
+                            ubahStatusPesanan();
                         }
                     })
                     // If something goes wrong .
@@ -197,63 +200,6 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         databaseReference.child("pesanan").child(idPesanan).child("statusPesanan").setValue("Menunggu Konfirmasi");
     }
 
-    private void buatPemberitahuan() {
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        String emailTempatFutsal = getIntent().getStringExtra("email");
-
-        try {
-            String jsonResponse;
-
-            URL url = new URL("https://onesignal.com/api/v1/notifications");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setUseCaches(false);
-            con.setDoOutput(true);
-            con.setDoInput(true);
-
-            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            con.setRequestProperty("Authorization", "Basic ZTM1ZDViNjMtMzAxMS00YTZiLWJmYjUtNjQ0NjZmN2IyYzUz");
-            con.setRequestMethod("POST");
-
-            String strJsonBody = "{"
-                    + "\"app_id\": \"65dbf75c-f04c-4559-875d-d6a0da59ea30\","
-                    + "\"included_segments\": [\"All\"],"
-                    + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + emailTempatFutsal + "\"}],"
-                    //+   "\"data\": {\"foo\": \"bar\"},"
-                    + "\"contents\": {\"en\": \"Pemesan Telah Melakukan Pembayaran\"}"
-                    + "}";
-
-
-            System.out.println("strJsonBody:\n" + strJsonBody);
-
-            byte[] sendBytes = strJsonBody.getBytes("UTF-8");
-            con.setFixedLengthStreamingMode(sendBytes.length);
-
-            OutputStream outputStream = con.getOutputStream();
-            outputStream.write(sendBytes);
-
-            int httpResponse = con.getResponseCode();
-            System.out.println("httpResponse: " + httpResponse);
-
-            if (httpResponse >= HttpURLConnection.HTTP_OK
-                    && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                scanner.close();
-            } else {
-                Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                scanner.close();
-            }
-            System.out.println("jsonResponse:\n" + jsonResponse);
-
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }
-
     private void hitungLunas() {
         final String idPesanan = getIntent().getStringExtra("idPesanan");
         databaseReference.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
@@ -294,6 +240,86 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         });
     }
 
+    private String getEmail() {
+        String idPesanan = getIntent().getStringExtra("idPesanan");
+        databaseReference.child("pesanan").child(idPesanan).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Pesanan dataEmail = dataSnapshot.getValue(Pesanan.class);
+                String email = dataEmail.getEmailTempatFutsal();
+                emailTempatFutsal = email;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return emailTempatFutsal;
+    }
+
+    private void buatPemberitahuan() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic ZTM1ZDViNjMtMzAxMS00YTZiLWJmYjUtNjQ0NjZmN2IyYzUz");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"65dbf75c-f04c-4559-875d-d6a0da59ea30\","
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + getEmail() + "\"}],"
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"Pemesan Telah Melakukan Pembayaran\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -307,4 +333,62 @@ public class UnggahBuktiActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+//    private void buatPemberitahuan() {
+//
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
+//
+//        String idPesanan = getIntent().getStringExtra("idPesanan");
+//        String emailTempatFutsal = databaseReference.child("pesanan").child(idPesanan).child("emailTempatFutsal").toString().trim();
+//
+//        try {
+//            String jsonResponse;
+//
+//            URL url = new URL("https://onesignal.com/api/v1/notifications");
+//            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//            con.setUseCaches(false);
+//            con.setDoOutput(true);
+//            con.setDoInput(true);
+//
+//            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+//            con.setRequestProperty("Authorization", "Basic ZTM1ZDViNjMtMzAxMS00YTZiLWJmYjUtNjQ0NjZmN2IyYzUz");
+//            con.setRequestMethod("POST");
+//
+//            String strJsonBody = "{"
+//                    + "\"app_id\": \"65dbf75c-f04c-4559-875d-d6a0da59ea30\","
+//                    + "\"included_segments\": [\"All\"],"
+//                    + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + emailTempatFutsal + "\"}],"
+//                    //+   "\"data\": {\"foo\": \"bar\"},"
+//                    + "\"contents\": {\"en\": \"Pemesan Telah Melakukan Pembayaran\"}"
+//                    + "}";
+//
+//
+//            System.out.println("strJsonBody:\n" + strJsonBody);
+//
+//            byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+//            con.setFixedLengthStreamingMode(sendBytes.length);
+//
+//            OutputStream outputStream = con.getOutputStream();
+//            outputStream.write(sendBytes);
+//
+//            int httpResponse = con.getResponseCode();
+//            System.out.println("httpResponse: " + httpResponse);
+//
+//            if (httpResponse >= HttpURLConnection.HTTP_OK
+//                    && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+//                Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+//                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+//                scanner.close();
+//            } else {
+//                Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+//                jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+//                scanner.close();
+//            }
+//            System.out.println("jsonResponse:\n" + jsonResponse);
+//
+//        } catch (Throwable t) {
+//            t.printStackTrace();
+//        }
+//    }
 }
